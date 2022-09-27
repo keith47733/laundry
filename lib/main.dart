@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
 				fontFamily: 'Montserrat',
       ),
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: FutureBuilder(
         future: Session.getUser(),
         builder: (context, AsyncSnapshot snapshot) {

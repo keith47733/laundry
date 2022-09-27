@@ -17,7 +17,8 @@ class LoginPage extends StatelessWidget {
   login() async {
     var user = await SourceUser.login(username.text, password.text);
     if (user == null) {
-      DInfo.toastError('Fail');
+			DInfo.dialogError('Login failed');
+			DInfo.closeDialog();
     } else {
       Session.saveUser(user);
       DInfo.dialogSuccess('Login successful');
