@@ -10,8 +10,8 @@
 
 class Laundry {
   String? id;
-  int? weight;
-  int? price;
+  double? weight;
+  double? price;
   String? status;
   DateTime? queueDate;
   String? date;
@@ -34,7 +34,7 @@ class Laundry {
   factory Laundry.fromJson(Map<String, dynamic> json) => Laundry(
         id: json["id"],
         weight: json["weight"].toDouble(),
-        price: json["price"].toDoubel(),
+        price: json["price"].toDouble(),
         status: json["status"],
         queueDate: DateTime.fromMicrosecondsSinceEpoch(json["queue_date"]),
         date: json["date"],
