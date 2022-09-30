@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Laundry Lord'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
@@ -40,11 +40,11 @@ class LoginPage extends StatelessWidget {
           DInput(
             title: 'User name',
             controller: username,
-            hint: 'Enter your username',
+            hint: 'Enter your username:',
           ),
           DView.spaceHeight(),
           DInput(
-            title: 'Password',
+            title: 'Password:',
             controller: password,
             hint: 'Enter your password',
           ),

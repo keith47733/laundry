@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-				fontFamily: 'Montserrat',
+        primarySwatch: Colors.blue,
+        fontFamily: 'Montserrat',
       ),
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
