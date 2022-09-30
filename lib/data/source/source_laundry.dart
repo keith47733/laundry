@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
@@ -32,8 +30,8 @@ class SourceLaundry {
         continue;
       }
       if (e.data()['status'] == Status.washing ||
-          e.data()['status'] == Status.beingDry ||
-          e.data()['status'] == Status.beingPrepared) {
+          e.data()['status'] == Status.drying ||
+          e.data()['status'] == Status.beingFolded) {
         data['Process'] = data['Process']! + 1;
         continue;
       }
@@ -41,30 +39,47 @@ class SourceLaundry {
         data['Done'] = data['Done']! + 1;
         continue;
       }
-      
     }
-		return data;
+    return data;
   }
 
-	static Future<Laundry?> searchById(String id) async {
-		final result = await _dbRef.doc(id).get();
-		if (result.exists) return Laundry.fromJson(result.data()!);
-		return null;
-	}
+  static Future<Laundry?> searchById(String id) async {
+    final result = await _dbRef.doc(id).get();
+    if (result.exists) return Laundry.fromJson(result.data()!);
+    return null;
+  }
 
-	static Future<bool> add(Laundry laundry) async {
-		final result = await _dbRef.add(laundry.toJson());
-		var newLaundry = await searchById(result.id);
-		if (newLaundry != null) {
-			result.update({'id': result.id});
-			return true;
-		}
-		return false;
-	}
+  static Future<bool> add(Laundry laundry) async {
+    final result = await _dbRef.add(laundry.toJson());
+    var newLaundry = await searchById(result.id);
+    if (newLaundry != null) {
+      result.update({'id': result.id});
+      return true;
+    }
+    return false;
+  }
 
-	static Future<List<Laundry>> whereStatus(String status) async {
-		final result = await _dbRef.where('status', isEqualTo: status).get();
-		print (result);
-		return result.docs.map((e) => Laundry.fromJson(e.data())).toList();
-	}
+  static Future<List<Laundry>> whereStatus(String status) async {
+    final result = await _dbRef.where('status', isEqualTo: status).get();
+    return result.docs.map((e) => Laundry.fromJson(e.data())).toList();
+  }
+
+  static Future<bool> updateStatus(String id, String newStatus) async {
+    await _dbRef.doc(id).update({'status': newStatus});
+    if (newStatus == Status.washing) {
+      await _dbRef.doc(id).update({'start_date': DateTime.now().microsecondsSinceEpoch});
+    }
+    if (newStatus == Status.done) {
+      await _dbRef.doc(id).update({'end_date': DateTime.now().microsecondsSinceEpoch});
+    }
+    Laundry? newLaundry = await searchById(id);
+    // Washing == Washing ? success : false
+    return newLaundry!.status == newStatus;
+  }
+
+  static Future<bool> delete(String id) async {
+    await _dbRef.doc(id).delete();
+    Laundry? newLaundry = await searchById(id);
+    return newLaundry == null;
+  }
 }

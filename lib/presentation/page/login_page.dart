@@ -3,6 +3,7 @@ import 'package:d_input/d_input.dart';
 import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:laundry/presentation/page/search_page.dart';
 
 import '../../config/session.dart';
 import '../../data/source/source_user.dart';
@@ -54,7 +55,9 @@ class LoginPage extends StatelessWidget {
             child: const Text('Login'),
           ),
           OutlinedButton(
-            onPressed: () => {},
+            onPressed: () => {
+							Get.to(() => const SearchPage()),
+						},
             child: const Text('Login as Customer'),
           ),
         ],

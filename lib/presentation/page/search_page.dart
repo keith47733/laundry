@@ -57,7 +57,6 @@ class SearchPage extends StatelessWidget {
       ),
       body: Obx(
         () {
-					if (searchController.text == '') return DView.empty('');
           if (cSearch.data.id == null) return DView.empty('Laundry not found');
           Laundry laundry = cSearch.data;
           return DetailLaundry(laundry: laundry);
