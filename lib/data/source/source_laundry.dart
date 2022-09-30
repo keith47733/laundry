@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
@@ -58,5 +60,11 @@ class SourceLaundry {
 			return true;
 		}
 		return false;
+	}
+
+	static Future<List<Laundry>> whereStatus(String status) async {
+		final result = await _dbRef.where('status', isEqualTo: status).get();
+		print (result);
+		return result.docs.map((e) => Laundry.fromJson(e.data())).toList();
 	}
 }

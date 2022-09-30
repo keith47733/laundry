@@ -8,6 +8,8 @@ import '../../config/status.dart';
 import '../../controller/c_home.dart';
 import '../../controller/c_user.dart';
 import 'add_page.dart';
+import 'search_page.dart';
+import 'where_status_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -42,7 +44,9 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Laundry Lord'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+							Get.to(() => const SearchPage());
+						},
             icon: const Icon(Icons.search),
           ),
           PopupMenuButton<String>(
@@ -88,10 +92,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-										Get.to(() => AddPage())?.then((value) {
-											cHome.setAnalysis();
-										});
-									},
+                    Get.to(() => AddPage())?.then((value) {
+                      cHome.setAnalysis();
+                    });
+                  },
                   child: const Text('Add Laundry'),
                 ),
               ],
@@ -105,11 +109,11 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(8.0),
           children: [
             analysToday(context),
-            DView.spaceHeight(8),
+            DView.spaceHeight(16),
             ...List.generate(Status.listMenu.length, (index) {
               String status = Status.listMenu[index];
               return menuItem(status, () {
-                //Get.to(() => WhereStatusPage(status: status));
+                Get.to(() => WhereStatusPage(status: status));
               });
             }),
           ], // Listview children
@@ -120,7 +124,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget menuItem(String title, Function onTap) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
+      padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
       child: Material(
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.lightBlue.withOpacity(0.2),
@@ -147,84 +151,89 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Card analysToday(BuildContext context) {
-    return Card(
-      elevation: 4.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: IntrinsicHeight(
-          child: Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Today',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  DView.spaceHeight(8.0),
-                  Expanded(
-                    child: Container(
-                      width: 100.0,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      alignment: Alignment.center,
-                      child: Obx(
-                        () {
-                          return Text(
-                            cHome.analysis['Today'].toString(),
-                            style: Theme.of(context).textTheme.headline3!.copyWith(
-                                  color: Colors.white,
-                                ),
-                          );
-                        },
+  Widget analysToday(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+      child: Card(
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Today',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    DView.spaceHeight(8.0),
+                    Expanded(
+                      child: Container(
+                        width: 100.0,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        alignment: Alignment.center,
+                        child: Obx(
+                          () {
+                            return Text(
+                              cHome.analysis['Today'].toString(),
+                              style: Theme.of(context).textTheme.headline3!.copyWith(
+                                    color: Colors.white,
+                                  ),
+                            );
+                          }, // Obx builder
+                        ),
                       ),
                     ),
-                  ),
-                ], // Column children
-              ),
-              DView.spaceWidth(),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(
-                    Status.listToday.length,
-                    (index) {
-                      return Padding(
-                        padding: EdgeInsets.fromLTRB(
-                          0,
-                          index == 0 ? 0 : 4,
-                          0,
-                          index == Status.listToday.length - 1 ? 0 : 4,
-                        ),
-                        child: Material(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(Status.listToday[index]),
-                                Obx(() {
-                                  String statusKey = Status.listToday[index];
-                                  return Text(cHome.analysis[statusKey].toString());
-                                })
-                              ],
+                  ], // Column children
+                ),
+                DView.spaceWidth(),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(
+                      Status.listToday.length,
+                      (index) {
+                        return Padding(
+                          padding: EdgeInsets.fromLTRB(
+                            0,
+                            index == 0 ? 0 : 4,
+                            0,
+                            index == Status.listToday.length - 1 ? 0 : 4,
+                          ),
+                          child: Material(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(Status.listToday[index]),
+                                  Obx(
+                                    () {
+                                      String statusKey = Status.listToday[index];
+                                      return Text(cHome.analysis[statusKey].toString());
+                                    },
+                                  ),
+                                ], // Row children
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      }, // List.generate builder
+                    ),
                   ),
                 ),
-              ),
-            ], // Row children
+              ], // Row children
+            ),
           ),
         ),
       ),

@@ -52,7 +52,7 @@ class AddPage extends StatelessWidget {
     return Scaffold(
       appBar: DView.appBarLeft('Add New'),
       body: ListView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         children: [
           DInput(
             controller: controllerCustomerName,
