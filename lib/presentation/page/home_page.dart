@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import './login_page.dart';
+import '../../config/palette.dart';
 import '../../config/session.dart';
 import '../../config/status.dart';
 import '../../controller/c_home.dart';
@@ -127,7 +128,8 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
       child: Material(
         borderRadius: BorderRadius.circular(8.0),
-        color: Colors.lightBlue.withOpacity(0.2),
+				
+        color: Palette.palette[100],
         child: InkWell(
           onTap: () => onTap(),
           borderRadius: BorderRadius.circular(8.0),
@@ -176,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         width: 100.0,
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: Palette.palette[500],
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         alignment: Alignment.center,
@@ -185,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                             return Text(
                               cHome.analysis['Today'].toString(),
                               style: Theme.of(context).textTheme.headline3!.copyWith(
-                                    color: Colors.white,
+                                    color: Palette.palette[50],
                                   ),
                             );
                           }, // Obx builder
@@ -209,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                             index == Status.listToday.length - 1 ? 0 : 4,
                           ),
                           child: Material(
-                            color: Colors.grey[200],
+                            color: Palette.palette[300],
                             borderRadius: BorderRadius.circular(8.0),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

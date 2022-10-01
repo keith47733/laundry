@@ -71,6 +71,8 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - ./assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -95,11 +97,11 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   fonts:
-  - family: Montserrat
+  - family: InterTight
     fonts:
-      - asset: assets/fonts/Montserrat-Regular.ttf
+      - asset: assets/fonts/InterTight-Regular.ttf
         weight: 300
-      - asset: assets/fonts/Montserrat-Bold.ttf
+      - asset: assets/fonts/InterTight-Bold.ttf
         weight: 600
   #
   # For details regarding fonts from package dependencies,

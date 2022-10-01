@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AppFormat {
   static String date(DateTime dateTime) {
-    return DateFormat('EEEE, d MMMM yyyy').format(dateTime);
+    return DateFormat('EEE MMM d, yyyy').format(dateTime);
   }
 
   static String time(DateTime dateTime) {

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
+import 'config/palette.dart';
 import 'config/session.dart';
 import 'firebase_options.dart';
 import 'presentation/page/home_page.dart';
@@ -23,8 +24,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Montserrat',
+        primarySwatch: Palette.palette,
+        fontFamily: 'InterTight',
       ),
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
