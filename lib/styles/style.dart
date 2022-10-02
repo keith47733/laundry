@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Style {
+static const double appSpacing = 16.0;
+static const double appRadius = 16.0;
+
   static String date(DateTime dateTime) {
     return DateFormat('EEE MMM d, yyyy').format(dateTime);
   }

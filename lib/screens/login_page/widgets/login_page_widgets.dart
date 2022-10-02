@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../styles/palette.dart';
+import '../../../styles/style.dart';
 
 Widget backgroundImage(String imagePath) {
   return Image(
@@ -14,7 +15,7 @@ Widget backgroundImage(String imagePath) {
 
 Widget loginTitle(String text) {
   return Padding(
-    padding: const EdgeInsets.fromLTRB(40, 20, 0, 20),
+    padding: const EdgeInsets.all(Style.appSpacing),
     child: Text(
       'Login',
       style: Theme.of(Get.context!).textTheme.headline3!.copyWith(
@@ -23,6 +24,4 @@ Widget loginTitle(String text) {
           ),
     ),
   );
-
-
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../styles/palette.dart';
+import '../styles/style.dart';
 
 Widget TextInputBox(
   final BuildContext context,
@@ -13,7 +14,11 @@ Widget TextInputBox(
 		crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Padding(
-        padding: const EdgeInsets.fromLTRB(8, 0, 0, 16),
+        padding: const EdgeInsets.fromLTRB(
+			Style.appSpacing,
+			Style.appSpacing/2,
+			Style.appSpacing,
+			Style.appSpacing,),
         child: Text(
           title,
           style: Theme.of(context).textTheme.headline6!.copyWith(
@@ -25,7 +30,7 @@ Widget TextInputBox(
         controller: controller,
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(Style.appRadius),
           ),
           filled: true,
           fillColor: Palette.palette[100],

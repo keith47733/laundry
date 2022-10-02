@@ -8,6 +8,7 @@ import 'services/session.dart';
 import 'services/firebase_options.dart';
 import 'screens/home_page/home_page.dart';
 import 'screens/login_page/login_page.dart';
+import 'styles/style.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,8 +29,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Palette.palette,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            padding: const EdgeInsets.all(12.0),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Style.appRadius)),
+            padding: const EdgeInsets.all(Style.appSpacing),
             textStyle: Theme.of(context).textTheme.headline5!.copyWith(
                   color: Palette.palette[50],
                 ),
