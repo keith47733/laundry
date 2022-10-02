@@ -99,9 +99,9 @@ flutter:
   fonts:
   - family: InterTight
     fonts:
-      - asset: assets/fonts/InterTight-Regular.ttf
+      - asset: assets/fonts/inter_tight/InterTight-Regular.ttf
         weight: 300
-      - asset: assets/fonts/InterTight-Bold.ttf
+      - asset: assets/fonts/inter_tight/InterTight-Bold.ttf
         weight: 600
   #
   # For details regarding fonts from package dependencies,

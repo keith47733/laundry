@@ -3,11 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
-import 'config/palette.dart';
-import 'config/session.dart';
-import 'firebase_options.dart';
-import 'presentation/page/home_page.dart';
-import 'presentation/page/login_page.dart';
+import 'styles/palette.dart';
+import 'services/session.dart';
+import 'services/firebase_options.dart';
+import 'screens/home_page/home_page.dart';
+import 'screens/login_page/login_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,8 +24,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        primarySwatch: Palette.palette,
         fontFamily: 'InterTight',
+        primarySwatch: Palette.palette,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            padding: const EdgeInsets.all(12.0),
+            textStyle: Theme.of(context).textTheme.headline5!.copyWith(
+                  color: Palette.palette[50],
+                ),
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
