@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../../../styles/style.dart';
+import '../../../theme/layout.dart';
 
 Widget homepageBanner() {
   return Padding(
     padding: const EdgeInsets.fromLTRB(
       0,
-      Style.appSpacing,
+      Layout.appSpacing,
       0,
       0,
     ),
     child: Card(
-      elevation: Style.cardElevation,
+      elevation: Layout.cardElevation,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Style.appRadius),
+        borderRadius: BorderRadius.circular(Layout.appRadius),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(Style.appRadius),
+        borderRadius: BorderRadius.circular(Layout.appRadius),
         child: const Image(
           image: AssetImage('./assets/images/homepage_banner.jpg'),
           width: double.infinity,

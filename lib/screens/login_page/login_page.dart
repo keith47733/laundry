@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../models/sources/source_user.dart';
 import '../../services/session.dart';
-import '../../styles/style.dart';
+import '../../theme/layout.dart';
 import 'local_widgets/login_input_box.dart';
 import '../home_page/home_page.dart';
 import '../search_page/search_page.dart';
@@ -27,22 +27,22 @@ class LoginPage extends StatelessWidget {
         children: [
           backgroundImage('./assets/images/login_background.jpg'),
           Padding(
-            padding: const EdgeInsets.all(Style.appSpacing),
+            padding: const EdgeInsets.all(Layout.appSpacing),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 loginTitle('Login'),
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(Style.appRadius),
+                  borderRadius: BorderRadius.circular(Layout.appRadius),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                     child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.4),
-                      ),
+                      decoration: const BoxDecoration(
+                          // color: Colors.black.withOpacity(0.4),
+                          ),
                       child: ListView(
-                        padding: const EdgeInsets.all(Style.appSpacing),
+                        padding: const EdgeInsets.all(Layout.appSpacing),
                         shrinkWrap: true,
                         children: [
                           loginInputBox(
@@ -60,16 +60,16 @@ class LoginPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(
                               0,
-                              Style.appSpacing,
+                              Layout.appSpacing,
                               0,
-                              Style.appSpacing / 2,
+                              Layout.appSpacing / 2,
                             ),
                             child: ElevatedButton(
                               onPressed: () => {
                                 login(),
                               },
                               child: const Padding(
-                                padding: EdgeInsets.all(Style.appSpacing / 2),
+                                padding: EdgeInsets.all(Layout.appSpacing / 2),
                                 child: Text('Administrator'),
                               ),
                             ),
@@ -77,16 +77,16 @@ class LoginPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(
                               0,
-                              Style.appSpacing,
+                              Layout.appSpacing,
                               0,
-                              Style.appSpacing / 2,
+                              Layout.appSpacing / 2,
                             ),
                             child: ElevatedButton(
                               onPressed: () => {
                                 Get.to(() => const SearchPage()),
                               },
                               child: const Padding(
-                                padding: EdgeInsets.all(Style.appSpacing / 3),
+                                padding: EdgeInsets.all(Layout.appSpacing / 3),
                                 child: Text(
                                   'Customer',
                                   textScaleFactor: 0.75,

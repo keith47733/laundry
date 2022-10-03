@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../models/process.dart';
-import '../../../styles/style.dart';
+import '../../../theme/layout.dart';
 import '../../../widgets/card_title.dart';
-import '../../process_page/process_page.dart';
 import 'process_menu_item.dart';
 
 Widget processCard() {
   return Padding(
     padding: const EdgeInsets.fromLTRB(
       0,
-      Style.appSpacing,
+      Layout.appSpacing,
       0,
       0,
     ),
     child: Card(
-      elevation: Style.cardElevation,
+      elevation: Layout.cardElevation,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Style.appRadius),
+        borderRadius: BorderRadius.circular(Layout.appRadius),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(
-          Style.appSpacing,
+          Layout.appSpacing,
           0,
-          Style.appSpacing,
-          Style.appSpacing,
+          Layout.appSpacing,
+          Layout.appSpacing,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

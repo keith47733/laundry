@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../styles/palette.dart';
-import '../../../styles/style.dart';
+import '../../../theme/layout.dart';
 import '../../process_page/process_page.dart';
 
 Widget processMenuItem(String itemProcess) {
@@ -11,26 +10,26 @@ Widget processMenuItem(String itemProcess) {
       0,
       0,
       0,
-      Style.appSpacing / 2,
+      Layout.appSpacing / 2,
     ),
     child: ListTile(
       onTap: () {
         Get.to(() => ProcessPage(status: itemProcess));
       },
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Style.appRadius),
+        borderRadius: BorderRadius.circular(Layout.appRadius),
       ),
-      tileColor: Palette.palette[200],
+      // tileColor: Palette.palette[200],
       leading: Ink(
         decoration: ShapeDecoration(
-          color: Colors.white.withOpacity(0.5),
-          shape: RoundedRectangleBorder(borderRadius:  BorderRadius.circular(Style.appRadius)),
+          // color: Colors.white.withOpacity(0.5),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Layout.appRadius)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Image(
             image: AssetImage('./assets/icons/${itemProcess.toLowerCase()}.png'),
-            height: Style.appSpacing * 2,
+            height: Layout.appSpacing * 2,
             fit: BoxFit.cover,
           ),
         ),

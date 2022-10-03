@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../styles/palette.dart';
-import '../styles/style.dart';
+import '../theme/layout.dart';
 
 Widget cardTitle(String title) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: Style.appSpacing),
+    padding: const EdgeInsets.symmetric(vertical: Layout.appSpacing),
     child: Text(
       title,
-      style: Theme.of(Get.context!).textTheme.headline6!.copyWith(color: Palette.palette[600]),
+      style: Theme.of(Get.context!).textTheme.headline6,
     ),
   );
 }
