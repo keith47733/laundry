@@ -24,8 +24,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      // debugShowCheckedModeBanner: false,
+      // title: 'Lord of the Linens',
+      // darkTheme: ThemeData(
+			// 	fontFamily: 'InterTight',
+      //   brightness: Brightness.dark,
+      // ),
+      // theme: ThemeData(
+			// 	fontFamily: 'InterTight',
+			// 	primarySwatch: Colors.blue,
+				
+      //   brightness: Brightness.light,
+      // ),
+      // themeMode: ThemeMode.system,
       theme: ThemeData(
-				useMaterial3: false,
         fontFamily: 'InterTight',
         primarySwatch: Palette.palette,
         textTheme: TextTheme(

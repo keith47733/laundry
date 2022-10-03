@@ -6,8 +6,7 @@ import '../../../styles/style.dart';
 import '../../process_page/process_page.dart';
 
 Widget processMenuItem(String itemProcess) {
-
-	return Padding(
+  return Padding(
     padding: const EdgeInsets.fromLTRB(
       0,
       0,
@@ -16,18 +15,24 @@ Widget processMenuItem(String itemProcess) {
     ),
     child: ListTile(
       onTap: () {
-                    Get.to(() => ProcessPage(status: itemProcess));
-                  },
+        Get.to(() => ProcessPage(status: itemProcess));
+      },
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Style.appRadius),
       ),
       tileColor: Palette.palette[200],
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(Style.appRadius),
-        child: Image(
-          image: AssetImage('./assets/icons/${itemProcess.toLowerCase()}.png'),
-          height: Style.appSpacing * 2,
-          fit: BoxFit.cover,
+      leading: Ink(
+        decoration: ShapeDecoration(
+          color: Colors.white.withOpacity(0.5),
+          shape: RoundedRectangleBorder(borderRadius:  BorderRadius.circular(Style.appRadius)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Image(
+            image: AssetImage('./assets/icons/${itemProcess.toLowerCase()}.png'),
+            height: Style.appSpacing * 2,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
       title: Text(

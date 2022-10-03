@@ -36,7 +36,15 @@ class _ProcessPageState extends State<ProcessPage> {
       appBar: DView.appBarLeft(widget.status),
       body: GetBuilder<CWhereStatus>(
         builder: (_) {
-          if (_.list.isEmpty) return DView.empty();
+          if (_.list.isEmpty) {
+            return const Center(
+              child: Image(
+                image: AssetImage('./assets/icons/no orders.png'),
+                height: Style.appSpacing * 2.5,
+                fit: BoxFit.cover,
+              ),
+            );
+          }
           return ListView.builder(
             itemCount: _.list.length,
             itemBuilder: ((context, index) {
@@ -67,13 +75,22 @@ class _ProcessPageState extends State<ProcessPage> {
                     },
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(Style.appRadius),
-                      child: const Image(
-                        image: AssetImage('./assets/images/queued.png'),
-                        height: Style.appSpacing * 2.5,
-                        fit: BoxFit.cover,
+                      child: Ink(
+                        decoration: ShapeDecoration(
+                          color: Colors.white.withOpacity(0.5),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Style.appRadius)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Image(
+                            image: AssetImage('./assets/icons/${laundry.status!.toLowerCase()}.png'),
+                            height: Style.appSpacing * 2.5,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
-                    horizontalTitleGap: 5,
+                    horizontalTitleGap: 15,
                     title: Padding(
                       padding: const EdgeInsets.fromLTRB(
                         Style.appSpacing / 2,

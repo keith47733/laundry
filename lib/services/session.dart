@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ class Session {
 
   static Future<User> getUser() async {
     User user = User();
+		//Timer(const Duration(seconds: 3), () {});
     final pref = await SharedPreferences.getInstance();
     String? stringUser = pref.getString('user');
     if (stringUser != null) {
