@@ -11,13 +11,14 @@ class CHome extends GetxController {
 
   final _analysis = {
     'Today': 0,
-    'Queue': 0,
-    'Process': 0,
+    'Queued': 0,
+    'Processing': 0,
     'Done': 0,
   }.obs;
 
   Map get analysis => _analysis.value;
+
   setAnalysis() async {
-    _analysis.value = Map.from(await SourceLaundry.getAnalys());
+    _analysis.value = Map.from(await SourceLaundry.homepageSummary());
   }
 }

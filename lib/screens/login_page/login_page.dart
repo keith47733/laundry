@@ -5,34 +5,20 @@ import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../home_page/home_page.dart';
-import '../search_page/search_page.dart';
 import '../../models/sources/source_user.dart';
 import '../../services/session.dart';
-import '../../styles/palette.dart';
 import '../../styles/style.dart';
 import '../../widgets/text_input_box.dart';
-import 'widgets/login_page_widgets.dart';
+import '../home_page/home_page.dart';
+import '../search_page/search_page.dart';
+import 'local_widgets/background_image.dart';
+import 'local_widgets/login_title.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
-
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void login() async {
-    var user = await SourceUser.login(usernameController.text, passwordController.text);
-    if (user == null) {
-      DInfo.dialogError('Login failed');
-      DInfo.closeDialog();
-    } else {
-      Session.saveUser(user);
-      DInfo.dialogSuccess('Login successful');
-      DInfo.closeDialog(actionAfterClose: () {
-        Get.off(() => const HomePage());
-      });
-    }
-  }
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +59,11 @@ class LoginPage extends StatelessWidget {
                             'Enter your username',
                             passwordController,
                           ),
-                         DView.spaceHeight(Style.appSpacing * 2),
+                          DView.spaceHeight(Style.appSpacing * 2),
                           ElevatedButton(
-                            onPressed: () => login(),
+                            onPressed: () => {
+                              login(),
+                            },
                             child: const Text('Administrator'),
                           ),
                           DView.spaceHeight(Style.appSpacing),
@@ -83,9 +71,9 @@ class LoginPage extends StatelessWidget {
                             onPressed: () => {
                               Get.to(() => const SearchPage()),
                             },
-                            child: Text(
+                            child: const Text(
                               'Customer',
-                              style: Theme.of(context).textTheme.headline6!.copyWith(color: Palette.palette[50]),
+                              textScaleFactor: 0.75,
                             ),
                           ),
                         ], // ListView children
@@ -99,5 +87,19 @@ class LoginPage extends StatelessWidget {
         ], // Stack children
       ),
     );
+  }
+
+  void login() async {
+    var user = await SourceUser.login(usernameController.text, passwordController.text);
+    if (user == null) {
+      DInfo.dialogError('Login failed');
+      DInfo.closeDialog();
+    } else {
+      Session.saveUser(user);
+      DInfo.dialogSuccess('Login successful');
+      DInfo.closeDialog(actionAfterClose: () {
+        Get.off(() => const HomePage());
+      });
+    }
   }
 }

@@ -27,11 +27,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'InterTight',
         primarySwatch: Palette.palette,
+        textTheme: TextTheme(
+          button: TextStyle(
+            fontSize: 15,
+            color: Palette.palette[50],
+          ),
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Style.appRadius)),
-            padding: const EdgeInsets.all(Style.appSpacing),
-            textStyle: Theme.of(context).textTheme.headline5!.copyWith(
+            padding: const EdgeInsets.fromLTRB(
+              Style.appSpacing * 1.25,
+              Style.appSpacing / 2,
+              Style.appSpacing * 1.25,
+              Style.appSpacing / 2,
+            ),
+            textStyle: Theme.of(context).textTheme.headline6!.copyWith(
+                  fontWeight: FontWeight.normal,
                   color: Palette.palette[50],
                 ),
           ),

@@ -1,14 +1,15 @@
 class Process {
-  static const queue = 'Queue';
+  static const queued = 'Queued';
   static const washing = 'Washing';
   static const drying = 'Drying';
   static const beingFolded = 'Being Folded';
   static const done = 'Done';
   static const taken = 'Taken';
-  static List listToday = [queue, 'Process', done];
+
+  static List listToday = ['Queued', 'Processing', 'Done'];
 
   static List listMenu = [
-    queue,
+    queued,
     washing,
     drying,
     beingFolded,

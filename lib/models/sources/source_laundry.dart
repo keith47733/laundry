@@ -7,11 +7,11 @@ import '../laundry.dart';
 class SourceLaundry {
   static final _dbRef = FirebaseFirestore.instance.collection('Laundry');
 
-  static Future<Map<String, int>> getAnalys() async {
+  static Future<Map<String, int>> homepageSummary() async {
     Map<String, int> data = {
       'Today': 0,
-      'Queue': 0,
-      'Process': 0,
+      'Queued': 0,
+      'Processing': 0,
       'Done': 0,
     };
 
@@ -25,14 +25,14 @@ class SourceLaundry {
     data['Today'] = result.size;
 
     for (var e in result.docs) {
-      if (e.data()['status'] == Process.queue) {
-        data['Queue'] = data['Queue']! + 1;
+      if (e.data()['status'] == Process.queued) {
+        data['Queued'] = data['Queued']! + 1;
         continue;
       }
       if (e.data()['status'] == Process.washing ||
           e.data()['status'] == Process.drying ||
           e.data()['status'] == Process.beingFolded) {
-        data['Process'] = data['Process']! + 1;
+        data['Processing'] = data['Processing']! + 1;
         continue;
       }
       if (e.data()['status'] == Process.done) {
