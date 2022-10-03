@@ -1,14 +1,13 @@
 import 'dart:ui';
 
 import 'package:d_info/d_info.dart';
-import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../models/sources/source_user.dart';
 import '../../services/session.dart';
 import '../../styles/style.dart';
-import '../../widgets/text_input_box.dart';
+import 'local_widgets/login_input_box.dart';
 import '../home_page/home_page.dart';
 import '../search_page/search_page.dart';
 import 'local_widgets/background_image.dart';
@@ -46,34 +45,53 @@ class LoginPage extends StatelessWidget {
                         padding: const EdgeInsets.all(Style.appSpacing),
                         shrinkWrap: true,
                         children: [
-                          TextInputBox(
+                          loginInputBox(
                             context,
                             'Username:',
                             'Enter your username',
                             usernameController,
                           ),
-                          DView.spaceHeight(Style.appSpacing),
-                          TextInputBox(
+                          loginInputBox(
                             context,
                             'Password:',
                             'Enter your username',
                             passwordController,
                           ),
-                          DView.spaceHeight(Style.appSpacing * 2),
-                          ElevatedButton(
-                            onPressed: () => {
-                              login(),
-                            },
-                            child: const Text('Administrator'),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                              0,
+                              Style.appSpacing,
+                              0,
+                              Style.appSpacing / 2,
+                            ),
+                            child: ElevatedButton(
+                              onPressed: () => {
+                                login(),
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.all(Style.appSpacing / 2),
+                                child: Text('Administrator'),
+                              ),
+                            ),
                           ),
-                          DView.spaceHeight(Style.appSpacing),
-                          ElevatedButton(
-                            onPressed: () => {
-                              Get.to(() => const SearchPage()),
-                            },
-                            child: const Text(
-                              'Customer',
-                              textScaleFactor: 0.75,
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                              0,
+                              Style.appSpacing,
+                              0,
+                              Style.appSpacing / 2,
+                            ),
+                            child: ElevatedButton(
+                              onPressed: () => {
+                                Get.to(() => const SearchPage()),
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.all(Style.appSpacing / 3),
+                                child: Text(
+                                  'Customer',
+                                  textScaleFactor: 0.75,
+                                ),
+                              ),
                             ),
                           ),
                         ], // ListView children

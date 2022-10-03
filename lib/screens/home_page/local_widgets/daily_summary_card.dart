@@ -73,7 +73,7 @@ Widget dailySummaryCard(BuildContext context, CUser cUser, CHome cHome) {
                         child: Container(
                           width: 100.0,
                           decoration: BoxDecoration(
-                            color: Palette.palette[500],
+                            color: Colors.lightBlue[100],
                             borderRadius: BorderRadius.circular(Style.appRadius),
                           ),
                           alignment: Alignment.center,

@@ -5,6 +5,7 @@ import 'package:laundry/styles/style.dart';
 
 import '../../models/controllers/c_where_status.dart';
 import '../../models/laundry.dart';
+import '../../styles/palette.dart';
 import '../detail_page/detail_page.dart';
 
 class ProcessPage extends StatefulWidget {
@@ -33,47 +34,94 @@ class _ProcessPageState extends State<ProcessPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DView.appBarLeft(widget.status),
-      body: GetBuilder<CWhereStatus>(builder: (_) {
-        if (_.list.isEmpty) return DView.empty();
-        return ListView.builder(
-          itemCount: _.list.length,
-          itemBuilder: ((context, index) {
-            Laundry laundry = _.list[index];
-            return Card(
-              child: ListTile(
-                onTap: () {
-                  Get.to(() => DetailPage(laundry: laundry))?.then((value) {
-                    if (value ?? false) {
-                      refresh();
-                    }
-                  });
-                },
-                leading: CircleAvatar(
-                  radius: 18,
-                  child: Text('${index + 1}'),
+      body: GetBuilder<CWhereStatus>(
+        builder: (_) {
+          if (_.list.isEmpty) return DView.empty();
+          return ListView.builder(
+            itemCount: _.list.length,
+            itemBuilder: ((context, index) {
+              Laundry laundry = _.list[index];
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  Style.appSpacing,
+                  Style.appSpacing / 2,
+                  Style.appSpacing,
+                  0,
                 ),
-                horizontalTitleGap: 10,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(laundry.customerName!),
-                    DView.spaceWidth(8),
-                    Text('(${laundry.id})', style: const TextStyle(fontSize: 13, color: Colors.grey)),
-                  ],
+                child: Card(
+                  elevation: Style.cardElevation,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Style.appRadius),
+                  ),
+                  child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(Style.appRadius),
+                    ),
+                    tileColor: Palette.palette[200],
+                    onTap: () {
+                      Get.to(() => DetailPage(laundry: laundry))?.then((value) {
+                        if (value ?? false) {
+                          refresh();
+                        }
+                      });
+                    },
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(Style.appRadius),
+                      child: const Image(
+                        image: AssetImage('./assets/images/queued.png'),
+                        height: Style.appSpacing * 2.5,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    horizontalTitleGap: 5,
+                    title: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        Style.appSpacing / 2,
+                        Style.appSpacing / 2,
+                        Style.appSpacing / 2,
+                        Style.appSpacing / 4,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              textScaleFactor: 0.75,
+                              laundry.customerName!,
+                              style: Theme.of(Get.context!).textTheme.headline6!),
+                        ],
+                      ),
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        Style.appSpacing / 2,
+                        Style.appSpacing / 4,
+                        Style.appSpacing / 2,
+                        Style.appSpacing / 2,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            textScaleFactor: 0.6,
+                            Style.date(laundry.queueDate!),
+                            style: Theme.of(Get.context!).textTheme.headline6!.copyWith(color: Palette.palette[600]),
+                          ),
+                          Text(
+                            textScaleFactor: 0.6,
+                            Style.time(laundry.queueDate!),
+                            style: Theme.of(Get.context!).textTheme.headline6!.copyWith(color: Palette.palette[600]),
+                          ),
+                        ],
+                      ),
+                    ),
+                    trailing: const Icon(Icons.navigate_next),
+                  ),
                 ),
-                subtitle: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(Style.date(laundry.queueDate!)),
-                    Text(Style.time(laundry.queueDate!)),
-                  ],
-                ),
-                trailing: const Icon(Icons.navigate_next),
-              ),
-            );
-          }),
-        );
-      }),
+              );
+            }),
+          );
+        },
+      ),
     );
   }
 }

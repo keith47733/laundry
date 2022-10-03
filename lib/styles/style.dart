@@ -6,7 +6,7 @@ import 'palette.dart';
 class Style {
   static const double appBarHeight = 80.0;
   static const double appSpacing = 16.0;
-  static const double appRadius = 8.0;
+  static const double appRadius = 6.0;
 	static Color? cardBackgroundColor = Palette.palette[200];
 	static const double cardElevation = 5.0;
 
@@ -15,7 +15,7 @@ class Style {
   }
 
   static String time(DateTime dateTime) {
-    return DateFormat('HH:mm a').format(dateTime);
+    return DateFormat('hh:mm a').format(dateTime);
   }
 
   static String currency(double price) {

@@ -11,22 +11,18 @@ Widget homepageBanner() {
       0,
     ),
     child: Card(
+      elevation: Style.cardElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Style.appRadius),
       ),
-      elevation: Style.cardElevation,
-      // child: Container(
-      //   decoration: BoxDecoration(
-      //     borderRadius: BorderRadius.circular(Style.appRadius),
-      //   ),
       child: ClipRRect(
-				borderRadius: BorderRadius.circular(Style.appRadius),
-				child: const Image(
-					image: AssetImage('./assets/images/homepage_banner.jpg'),
-					width: double.infinity,
-					fit: BoxFit.cover,
-				),
-			),
+        borderRadius: BorderRadius.circular(Style.appRadius),
+        child: const Image(
+          image: AssetImage('./assets/images/homepage_banner.jpg'),
+          width: double.infinity,
+          fit: BoxFit.cover,
+        ),
+      ),
     ),
   );
 }

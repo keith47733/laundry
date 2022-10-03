@@ -61,11 +61,11 @@ class _HomePageState extends State<HomePage> {
               Style.appSpacing,
               0,
               Style.appSpacing,
-              Style.appSpacing,
+              Style.appSpacing * 2,
             ),
             child: Column(
               children: [
-								homepageBanner(),
+                homepageBanner(),
                 dailySummaryCard(context, cUser, cHome),
                 processCard(),
               ], // Column children
@@ -73,9 +73,26 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        color: Palette.palette[300],
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.menu),
+              color: Colors.transparent,
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ),
+
       floatingActionButton: FloatingActionButton(
-        elevation: 8,
-        child: const Icon(Icons.add),
+        elevation: 5.0,
+        backgroundColor: Colors.lightBlue[100],
+				child: const Icon(Icons.add),
         onPressed: () {
           Get.to(() => AddPage())?.then(
             (value) {
@@ -84,6 +101,7 @@ class _HomePageState extends State<HomePage> {
           ); // Page Navigation
         }, // onPressed
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 

@@ -34,12 +34,9 @@ Widget processCard() {
             ...List.generate(
               Process.listMenu.length,
               (index) {
-                String status = Process.listMenu[index];
+                String itemProcess = Process.listMenu[index];
                 return processMenuItem(
-                  status,
-                  () {
-                    Get.to(() => ProcessPage(status: status));
-                  },
+                  itemProcess,
                 );
               },
             ),

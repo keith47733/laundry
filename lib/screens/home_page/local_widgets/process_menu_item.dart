@@ -3,38 +3,41 @@ import 'package:get/get.dart';
 
 import '../../../styles/palette.dart';
 import '../../../styles/style.dart';
+import '../../process_page/process_page.dart';
 
-Widget processMenuItem(String title, Function onTap) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        0,
-        0,
-        0,
-        Style.appSpacing / 2,
-      ),
-      child: Material(
+Widget processMenuItem(String itemProcess) {
+
+	return Padding(
+    padding: const EdgeInsets.fromLTRB(
+      0,
+      0,
+      0,
+      Style.appSpacing / 2,
+    ),
+    child: ListTile(
+      onTap: () {
+                    Get.to(() => ProcessPage(status: itemProcess));
+                  },
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Style.appRadius),
-        color: Palette.palette[200],
-        child: InkWell(
-          onTap: () => onTap(),
-          borderRadius: BorderRadius.circular(Style.appRadius),
-          child: Padding(
-            padding: const EdgeInsets.all(Style.appSpacing / 2),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  textScaleFactor: 0.8,
-                  title,
-                  style: Theme.of(Get.context!).textTheme.headline6,
-                ),
-                const Icon(
-                  Icons.navigate_next,
-                ),
-              ],
-            ),
-          ),
+      ),
+      tileColor: Palette.palette[200],
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(Style.appRadius),
+        child: Image(
+          image: AssetImage('./assets/icons/${itemProcess.toLowerCase()}.png'),
+          height: Style.appSpacing * 2,
+          fit: BoxFit.cover,
         ),
       ),
-    );
-  }
+      title: Text(
+        textScaleFactor: 0.8,
+        itemProcess,
+        style: Theme.of(Get.context!).textTheme.headline6,
+      ),
+      trailing: const Icon(
+        Icons.navigate_next,
+      ),
+    ),
+  );
+}

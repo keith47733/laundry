@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
+				useMaterial3: false,
         fontFamily: 'InterTight',
         primarySwatch: Palette.palette,
         textTheme: TextTheme(
