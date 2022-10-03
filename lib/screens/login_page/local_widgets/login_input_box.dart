@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../styles/palette.dart';
-import '../../../styles/style.dart';
+import '../../../theme/layout.dart';
 
 Widget loginInputBox(
   final BuildContext context,
@@ -18,12 +17,12 @@ Widget loginInputBox(
           0,
           0,
           0,
-          Style.appSpacing / 2,
+          Layout.appSpacing / 2,
         ),
         child: Text(
           title,
           style: Theme.of(context).textTheme.headline6!.copyWith(
-                color: Palette.palette[50],
+              // color: Palette.palette[50],
               ),
         ),
       ),
@@ -32,17 +31,17 @@ Widget loginInputBox(
           0,
           0,
           0,
-          Style.appSpacing,
+          Layout.appSpacing,
         ),
         child: TextField(
           controller: controller,
           decoration: InputDecoration(
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Style.appRadius),
+              borderRadius: BorderRadius.circular(Layout.appRadius),
             ),
-            contentPadding: const EdgeInsets.all(Style.appSpacing / 1.25),
+            contentPadding: const EdgeInsets.all(Layout.appSpacing / 1.25),
             filled: true,
-            fillColor: Palette.palette[50],
+            // fillColor: Palette.palette[50],
             hintText: hint,
           ),
         ),

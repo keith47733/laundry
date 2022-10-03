@@ -1,15 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'palette.dart';
-
-class Style {
-  static const double appBarHeight = 80.0;
-  static const double appSpacing = 16.0;
-  static const double appRadius = 6.0;
-	static Color? cardBackgroundColor = Palette.palette[200];
-	static const double cardElevation = 5.0;
-
+class Format {
   static String date(DateTime dateTime) {
     return DateFormat('EEE MMM d, yyyy').format(dateTime);
   }

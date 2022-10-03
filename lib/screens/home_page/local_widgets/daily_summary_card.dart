@@ -5,29 +5,29 @@ import 'package:get/get.dart';
 import '../../../models/controllers/c_home.dart';
 import '../../../models/controllers/c_user.dart';
 import '../../../models/process.dart';
-import '../../../styles/palette.dart';
-import '../../../styles/style.dart';
+import '../../../theme/layout.dart';
+import '../../../utils/format.dart';
 import '../../../widgets/card_title.dart';
 
 Widget dailySummaryCard(BuildContext context, CUser cUser, CHome cHome) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(
       0,
-      Style.appSpacing,
+      Layout.appSpacing,
       0,
       0,
     ),
     child: Card(
-      elevation: Style.cardElevation,
+      elevation: Layout.cardElevation,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Style.appRadius),
+        borderRadius: BorderRadius.circular(Layout.appRadius),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(
-          Style.appSpacing,
+          Layout.appSpacing,
           0,
-          Style.appSpacing,
-          Style.appSpacing,
+          Layout.appSpacing,
+          Layout.appSpacing,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,18 +41,18 @@ Widget dailySummaryCard(BuildContext context, CUser cUser, CHome cHome) {
                 }),
                 Text(
                   '[ADMINISTRATOR]',
-                  textScaleFactor: 0.7,
-                  style: Theme.of(Get.context!).textTheme.headline6!.copyWith(color: Palette.palette[400]),
+                  textScaleFactor: 0.6,
+                  style: Theme.of(Get.context!).textTheme.headline6,
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: Style.appSpacing),
+              padding: const EdgeInsets.only(bottom: Layout.appSpacing),
               child: Row(
                 children: [
                   const Icon(Icons.navigate_before),
                   Text(
-                    '   ${Style.date(DateTime.now())}',
+                    '   ${Format.date(DateTime.now())}',
                     textScaleFactor: 0.9,
                     style: Theme.of(Get.context!).textTheme.headline6,
                   ),
@@ -73,17 +73,15 @@ Widget dailySummaryCard(BuildContext context, CUser cUser, CHome cHome) {
                         child: Container(
                           width: 100.0,
                           decoration: BoxDecoration(
-                            color: Colors.lightBlue[100],
-                            borderRadius: BorderRadius.circular(Style.appRadius),
+                            // color: Colors.lightBlue[100],
+                            borderRadius: BorderRadius.circular(Layout.appRadius),
                           ),
                           alignment: Alignment.center,
                           child: Obx(
                             () {
                               return Text(
                                 cHome.analysis['Today'].toString(),
-                                style: Theme.of(context).textTheme.headline3!.copyWith(
-                                      color: Palette.palette[50],
-                                    ),
+                                style: Theme.of(context).textTheme.headline3,
                               );
                             }, // Obx builder
                           ),
@@ -105,11 +103,14 @@ Widget dailySummaryCard(BuildContext context, CUser cUser, CHome cHome) {
                               0,
                               index == Process.listToday.length - 1 ? 0 : 4,
                             ),
-                            child: Material(
-                              color: Palette.palette[200],
-                              borderRadius: BorderRadius.circular(Style.appRadius),
+                            child: Ink(
+                              // color: Palette.palette[200],
+                              decoration: ShapeDecoration(
+                                // color: Colors.white.withOpacity(0.5),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Layout.appRadius)),
+                              ),
                               child: Padding(
-                                padding: const EdgeInsets.all(Style.appSpacing / 2),
+                                padding: const EdgeInsets.all(Layout.appSpacing / 2),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [

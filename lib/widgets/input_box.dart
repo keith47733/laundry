@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../styles/palette.dart';
-import '../../../styles/style.dart';
+import '../theme/layout.dart';
 
 Widget inputBox(
   final BuildContext context,
@@ -18,14 +17,12 @@ Widget inputBox(
           0,
           0,
           0,
-          Style.appSpacing / 2,
+          Layout.appSpacing / 2,
         ),
         child: Text(
-					textScaleFactor: 0.75,
+          textScaleFactor: 0.75,
           title,
-          style: Theme.of(context).textTheme.headline6!.copyWith(
-                color: Palette.palette[700],
-              ),
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
       Padding(
@@ -33,18 +30,18 @@ Widget inputBox(
           0,
           0,
           0,
-          Style.appSpacing,
+          Layout.appSpacing,
         ),
         child: TextField(
           controller: controller,
           decoration: InputDecoration(
-						isDense: true,
-						contentPadding: const EdgeInsets.all(Style.appSpacing / 1.25),
+            isDense: true,
+            contentPadding: const EdgeInsets.all(Layout.appSpacing / 1.25),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Style.appRadius),
+              borderRadius: BorderRadius.circular(Layout.appRadius),
             ),
             filled: true,
-            fillColor: Palette.palette[50],
+            // fillColor: Palette.palette[50],
             hintText: hint,
           ),
         ),

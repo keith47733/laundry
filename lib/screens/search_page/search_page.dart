@@ -24,7 +24,7 @@ class SearchPage extends StatelessWidget {
           preferredSize: const Size.fromHeight(70),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              // color: Colors.white,
               borderRadius: BorderRadius.circular(4),
             ),
             padding: const EdgeInsets.all(8),

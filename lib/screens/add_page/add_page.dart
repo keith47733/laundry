@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:laundry/widgets/card_title.dart';
 
-import '../../models/sources/source_laundry.dart';
 import '../../models/laundry.dart';
-import '../../styles/style.dart';
+import '../../models/sources/source_laundry.dart';
+import '../../theme/layout.dart';
 import '../../widgets/input_box.dart';
 
 class AddPage extends StatelessWidget {
@@ -45,22 +45,22 @@ class AddPage extends StatelessWidget {
       appBar: DView.appBarLeft('Add New'),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(
-          Style.appSpacing,
-          Style.appSpacing,
-          Style.appSpacing,
-          Style.appSpacing,
+          Layout.appSpacing,
+          Layout.appSpacing,
+          Layout.appSpacing,
+          Layout.appSpacing,
         ),
         child: Card(
-          elevation: Style.cardElevation,
+          elevation: Layout.cardElevation,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Style.appRadius),
+            borderRadius: BorderRadius.circular(Layout.appRadius),
           ),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(
-              Style.appSpacing,
+              Layout.appSpacing,
               0,
-              Style.appSpacing,
-              Style.appSpacing,
+              Layout.appSpacing,
+              Layout.appSpacing,
             ),
             child: ListView(
               shrinkWrap: true,
@@ -72,14 +72,14 @@ class AddPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(
                     0,
-                    Style.appSpacing,
+                    Layout.appSpacing,
                     0,
-                    Style.appSpacing / 2,
+                    Layout.appSpacing / 2,
                   ),
                   child: ElevatedButton(
                     onPressed: addLaundryOrder,
                     child: const Padding(
-                      padding: EdgeInsets.all(Style.appSpacing / 2),
+                      padding: EdgeInsets.all(Layout.appSpacing / 2),
                       child: Text(
                         'Add Laundry Order',
                         textScaleFactor: 0.75,

@@ -4,14 +4,13 @@ import 'package:get/get.dart';
 import '../../models/controllers/c_home.dart';
 import '../../models/controllers/c_user.dart';
 import '../../services/session.dart';
-import '../../styles/palette.dart';
-import '../../styles/style.dart';
+import '../../theme/layout.dart';
 import '../add_page/add_page.dart';
 import '../login_page/login_page.dart';
 import '../search_page/search_page.dart';
+import 'local_widgets/daily_summary_card.dart';
 import 'local_widgets/homepage_banner.dart';
 import 'local_widgets/process_card.dart';
-import 'local_widgets/daily_summary_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.palette[50],
+      // backgroundColor: Palette.palette[50],
       appBar: AppBar(
         title: const Text('Lord of the Linens'),
         actions: [
@@ -58,10 +57,10 @@ class _HomePageState extends State<HomePage> {
           scrollDirection: Axis.vertical,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(
-              Style.appSpacing,
+              Layout.appSpacing,
               0,
-              Style.appSpacing,
-              Style.appSpacing * 2,
+              Layout.appSpacing,
+              Layout.appSpacing * 2,
             ),
             child: Column(
               children: [
@@ -75,24 +74,23 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        color: Palette.palette[300],
+        // color: Palette.palette[300],
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
               icon: const Icon(Icons.menu),
-              color: Colors.transparent,
+              // color: Colors.transparent,
               onPressed: () {},
             ),
           ],
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
         elevation: 5.0,
-        backgroundColor: Colors.lightBlue[100],
-				child: const Icon(Icons.add),
+        // backgroundColor: Colors.lightBlue[100],
+        child: const Icon(Icons.add),
         onPressed: () {
           Get.to(() => AddPage())?.then(
             (value) {
