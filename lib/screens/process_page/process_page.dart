@@ -1,12 +1,11 @@
-import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../models/controllers/c_where_status.dart';
 import '../../models/laundry.dart';
-import '../../theme/layout.dart';
-import '../../utils/format.dart';
-import '../detail_page/detail_page.dart';
+import '../../styles/format.dart';
+import '../../styles/layout.dart';
+import '../status_page/status_page.dart';
 
 class ProcessPage extends StatefulWidget {
   const ProcessPage({super.key, required this.status});
@@ -33,7 +32,9 @@ class _ProcessPageState extends State<ProcessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DView.appBarLeft(widget.status),
+      appBar: AppBar(
+        title: Text('${widget.status} Orders'),
+      ),
       body: GetBuilder<CWhereStatus>(
         builder: (_) {
           if (_.list.isEmpty) {
@@ -56,83 +57,68 @@ class _ProcessPageState extends State<ProcessPage> {
                   Layout.appSpacing,
                   0,
                 ),
-                child: Card(
-                  elevation: Layout.cardElevation,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(Layout.appRadius),
-                  ),
-                  child: ListTile(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(Layout.appRadius),
-                    ),
-                    // tileColor: Palette.palette[200],
+                child: ListTile(
                     onTap: () {
-                      Get.to(() => DetailPage(laundry: laundry))?.then((value) {
+                      Get.off(() => StatusPage(laundry: laundry))?.then((value) {
                         if (value ?? false) {
                           refresh();
                         }
-                      });
-                    },
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(Layout.appRadius),
-                      child: Ink(
-                        decoration: ShapeDecoration(
-                          // color: Colors.white.withOpacity(0.5),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Layout.appRadius)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Image(
-                            image: AssetImage('./assets/icons/${laundry.status!.toLowerCase()}.png'),
-                            height: Layout.appSpacing * 2.5,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                    });
+                  },
+                  leading: Ink(
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Layout.appRadius)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(Layout.appSpacing / 4),
+                      child: Image(
+                        image: AssetImage('./assets/icons/${laundry.status!.toLowerCase()}.png'),
+                        height: Layout.appSpacing * 5,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    horizontalTitleGap: 15,
-                    title: Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        Layout.appSpacing / 2,
-                        Layout.appSpacing / 2,
-                        Layout.appSpacing / 2,
-                        Layout.appSpacing / 4,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              textScaleFactor: 0.75,
-                              laundry.customerName!,
-                              style: Theme.of(Get.context!).textTheme.headline6!),
-                        ],
-                      ),
+                  ),
+                  horizontalTitleGap: 15,
+                  title: Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Layout.appSpacing / 2,
+                      Layout.appSpacing / 2,
+                      Layout.appSpacing / 2,
+                      Layout.appSpacing / 2,
                     ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        Layout.appSpacing / 2,
-                        Layout.appSpacing / 4,
-                        Layout.appSpacing / 2,
-                        Layout.appSpacing / 2,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            textScaleFactor: 0.75,
+                            laundry.customerName!,
+                            style: Theme.of(Get.context!).textTheme.headline6!),
+                      ],
+                    ),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Layout.appSpacing / 2,
+                      Layout.appSpacing / 4,
+                      Layout.appSpacing / 2,
+                      Layout.appSpacing / 2,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
                             textScaleFactor: 0.6,
                             Format.date(laundry.queueDate!),
-                            style: Theme.of(Get.context!).textTheme.headline6,
-                          ),
-                          Text(
+                            style: Theme.of(Get.context!).textTheme.headline6!),
+                        Text(
                             textScaleFactor: 0.6,
                             Format.time(laundry.queueDate!),
-                            style: Theme.of(Get.context!).textTheme.headline6,
-                          ),
-                        ],
-                      ),
+                            style: Theme.of(Get.context!).textTheme.headline6!),
+                      ],
                     ),
-                    trailing: const Icon(Icons.navigate_next),
                   ),
+                  trailing: const Icon(Icons.navigate_next),
                 ),
               );
             }),

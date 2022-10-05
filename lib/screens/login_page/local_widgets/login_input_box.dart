@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/layout.dart';
+import '../../../styles/layout.dart';
 
 Widget loginInputBox(
   final BuildContext context,

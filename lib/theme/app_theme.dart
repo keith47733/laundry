@@ -1,64 +1,211 @@
+// ignore_for_file:prefer_const_constructors,deprecated_member_use
+
 import 'package:flutter/material.dart';
 
-ThemeData lightTheme = ThemeData(
-  fontFamily: 'InterTight',
-  brightness: Brightness.light,
-  visualDensity: const VisualDensity(vertical: 0.5, horizontal: 0.5),
-  primaryColor: const Color(0xffEDD5B3),
-  primaryColorLight: const Color(0x1aF5E0C3),
-  primaryColorDark: const Color(0xff936F3E),
-  canvasColor: const Color(0xffE09E45),
-  scaffoldBackgroundColor: const Color(0xffB5BFD3),
-  bottomAppBarColor: const Color(0xff6D42CE),
-  cardColor: const Color(0xaaF5E0C3),
-  dividerColor: const Color(0x1f6D42CE),
-  focusColor: const Color(0x1aF5E0C3),
-  // colorScheme: ColorScheme.fromSwatch(
-  //         primarySwatch: const MaterialColor(
-  //       0xFFF5E0C3,
-  //       <int, Color>{
-  //         50: Color(0x1aF5E0C3),
-  //         100: Color(0xa1F5E0C3),
-  //         200: Color(0xaaF5E0C3),
-  //         300: Color(0xafF5E0C3),
-  //         400: Color(0xffF5E0C3),
-  //         500: Color(0xffEDD5B3),
-  //         600: Color(0xffDEC29B),
-  //         700: Color(0xffC9A87C),
-  //         800: Color(0xffB28E5E),
-  //         900: Color(0xff936F3E)
-  //       },
-  //     )).copyWith(secondary: const Color(0xff457BE0)),
-  //     ),
-);
+import '../styles/layout.dart';
 
-ThemeData darkTheme = ThemeData(
-  fontFamily: 'InterTight',
-  brightness: Brightness.dark,
-  visualDensity: const VisualDensity(vertical: 0.5, horizontal: 0.5),
-  primaryColor: const Color(0xff5D4524),
-  primaryColorLight: const Color(0x1a311F06),
-  primaryColorDark: const Color(0xff936F3E),
-  canvasColor: const Color(0xffE09E45),
-  scaffoldBackgroundColor: const Color(0xffB5BFD3),
-  bottomAppBarColor: const Color(0xff6D42CE),
-  cardColor: const Color(0xaa311F06),
-  dividerColor: const Color(0x1f6D42CE),
-  focusColor: const Color(0x1a311F06),
-  // colorScheme: ColorScheme.fromSwatch(
-  //     primarySwatch: const MaterialColor(
-  //   0xFFF5E0C3,
-  //   <int, Color>{
-  //     50: Color(0x1a5D4524),
-  //     100: Color(0xa15D4524),
-  //     200: Color(0xaa5D4524),
-  //     300: Color(0xaf5D4524),
-  //     400: Color(0x1a483112),
-  //     500: Color(0xa1483112),
-  //     600: Color(0xaa483112),
-  //     700: Color(0xff483112),
-  //     800: Color(0xaf2F1E06),
-  //     900: Color(0xff2F1E06)
-  //   },
-  // )).copyWith(secondary: const Color(0xff457BE0)),
+final Color color1 = hexToColor('7895B2');
+final Color color2 = hexToColor('AEBDCA');
+final Color color3 = hexToColor('E8DFCA');
+final Color color4 = hexToColor('F5EFE6');
+
+Color hexToColor(String code) {
+  return Color(int.parse(code.substring(0, 6), radix: 16) + 0xFF000000);
+}
+
+Color darken(Color baseColor, int percent) {
+  // assert(1 <= percent && percent <= 100);
+  var f = 1 - percent / 100;
+  return Color.fromARGB(
+      baseColor.alpha, (baseColor.red * f).round(), (baseColor.green * f).round(), (baseColor.blue * f).round());
+}
+
+Color lighten(Color baseColor, int percent) {
+  // assert(1 <= percent && percent <= 100);
+  var p = percent / 100;
+  return Color.fromARGB(baseColor.alpha, baseColor.red + ((255 - baseColor.red) * p).round(),
+      baseColor.green + ((255 - baseColor.green) * p).round(), baseColor.blue + ((255 - baseColor.blue) * p).round());
+}
+
+ThemeData lightTheme = ThemeData(
+  // MISCELLANEOUS
+  // applyElevationOverlayColor: false,
+  brightness: Brightness.light,
+  // fixTextFieldOutlineLabel: true,
+  fontFamily: 'Roboto',
+  // materialTapTargetSize: MaterialTapTargetSize.padded,
+  platform: TargetPlatform.android,
+  // splashFactory: InkSplash.splashFactory,
+  // typography: Typography.material2021(),
+  // useMaterial3: true,
+  // visualDensity: VisualDensity(vertical: 1, horizontal: 1),
+
+  // COLOR SCHEME
+  // Create color scheme for app theme
+  // colorScheme: ColorScheme(
+  //   brightness: Brightness.light,
+  //   background: Colors.white,
+  //   error: Colors.white,
+  //   onBackground: Colors.white,
+  //   onError: Colors.white,
+  //   onPrimary: Colors.white,
+  //   onSecondary: Colors.white,
+  //   onSurface: Colors.white,
+  //   primary: Colors.white,
+  //   secondary: Colors.white,
+  //   surface: Colors.white,
+  // ),
+
+  // PRIMARY SWATCH
+  // Acts a primary color with shades
+  primarySwatch: MaterialColor(
+    0xFFAEBDCA, // requires 0xFF plus color hex code
+    <int, Color>{
+      50: lighten(color2, 90),
+      100: lighten(color2, 80),
+      200: lighten(color2, 60),
+      300: lighten(color2, 40),
+      400: lighten(color2, 20),
+      500: color2,
+      600: darken(color2, 20),
+      700: darken(color2, 40),
+      800: darken(color2, 60),
+      900: darken(color2, 80),
+    },
+  ),
+
+// CUSTOM COLORS
+  // accentColor: Colors.white,
+  // backgroundColor: Colors.white,
+  // bottomAppBarColor: Colors.white,
+  // buttonColor: Colors.white,
+  // canvasColor: Colors.white,
+  // cardColor: Colors.white,
+  // colorSchemeSeed: Colors.white,
+  // dialogBackgroundColor: Colors.white,
+  // disabledColor: Colors.white,
+  dividerColor: color1,
+  // errorColor: Colors.white,
+  // focusColor: Colors.white,
+  // highlightColor: Colors.white,
+  // hintColor: Colors.white,
+  hoverColor: lighten(color2, 30),
+  // indicatorColor: Colors.white,
+  // primaryColor: Colors.white,
+  // primaryColorDark: Colors.white,
+  // primaryColorLight: Colors.white,
+  scaffoldBackgroundColor: lighten(color4, 60),
+  // secondaryHeaderColor: Colors.white,
+  // splashColor: Colors.white,
+  // toggleableActiveColor: Colors.white,
+  // unselectedWidgetColor: Colors.white,
+
+// THEMES FOR PRE-DEFINED FONT TYPES
+  // textTheme: TextTheme(
+  //   bodyLarge: TextStyle(),
+  //   bodyMedium: TextStyle(),
+  //   bodySmall: TextStyle(),
+  //   bodyText1: TextStyle(),
+  //   bodyText2: TextStyle(),
+  //   button: TextStyle(),
+  //   caption: TextStyle(),
+  //   displayLarge: TextStyle(),
+  //   displayMedium: TextStyle(),
+  //   displaySmall: TextStyle(),
+  //   headline1: TextStyle(),
+  //   headline2: TextStyle(),
+  //   headline3: TextStyle(),
+  //   headline4: TextStyle(),
+  //   headline5: TextStyle(),
+  //   headline6: TextStyle(),
+  //   headlineLarge: TextStyle(),
+  //   headlineMedium: TextStyle(),
+  //   headlineSmall: TextStyle(),
+  //   labelLarge: TextStyle(),
+  //   labelMedium: TextStyle(),
+  //   labelSmall: TextStyle(),
+  //   overline: TextStyle(),
+  //   subtitle1: TextStyle(),
+  //   subtitle2: TextStyle(),
+  //   titleLarge: TextStyle(),
+  //   titleMedium: TextStyle(),
+  //   titleSmall: TextStyle(),
+  // ),
+
+  // WIDGET THEMES
+  // Theme properties override custom colors and text
+  // accentColorBrightness: Brightness.light,
+  // cupertinoOverrideTheme: NoDefaultCupertinoThemeData(),
+  // primaryColorBrightness: Brightness.light,
+  // accentIconTheme: IconThemeData(),
+  appBarTheme: AppBarTheme(
+    elevation: Layout.appElevation,
+    backgroundColor: color1,
+    foregroundColor: lighten(color4, 80),
+  ),
+  // bannerTheme: MaterialBannerThemeData(),
+  bottomAppBarTheme: BottomAppBarTheme(
+    elevation: Layout.appElevation,
+    shape: const CircularNotchedRectangle(),
+    color: color1,
+  ),
+  // bottomNavigationBarTheme: BottomNavigationBarThemeData(),
+  // bottomSheetTheme: BottomSheetThemeData(),
+  // buttonBarTheme: ButtonBarThemeData(),
+  // buttonTheme: ButtonThemeData(),
+  cardTheme: CardTheme(
+    elevation: Layout.appElevation,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(Layout.appRadius),
+    ),
+  ),
+  // checkboxTheme: CheckboxThemeData(),
+  // chipTheme: ChipThemeData(),
+  // dataTableTheme: DataTableThemeData(),
+  // dialogTheme: DialogTheme(),
+  // dividerTheme: DividerThemeData(),
+  // drawerTheme: DrawerThemeData(),
+  // elevatedButtonTheme: ElevatedButtonThemeData(),
+  // expansionTileTheme: ExpansionTileThemeData(),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: color2,
+    foregroundColor: lighten(color4, 80),
+  ),
+  iconTheme: IconThemeData(
+    color: darken(color1, 40),
+  ),
+  // inputDecorationTheme: InputDecorationTheme(),
+  listTileTheme: ListTileThemeData(
+    tileColor: lighten(color2, 75),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(Layout.appRadius),
+    ),
+  ),
+  // navigationBarTheme: NavigationBarThemeData(),
+  // navigationRailTheme: NavigationRailThemeData(),
+  // outlinedButtonTheme: OutlinedButtonThemeData(),
+  // pageTransitionsTheme: PageTransitionsTheme(),
+  popupMenuTheme: PopupMenuThemeData(
+      elevation: Layout.appElevation,
+      color: darken(color1, 40),
+      enableFeedback: false,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Layout.appRadius),
+      ),
+      textStyle: TextStyle(
+        color: lighten(color4, 80),
+      )),
+  // primaryIconTheme: IconThemeData(),
+  // progressIndicatorTheme: ProgressIndicatorThemeData(),
+  // radioTheme: RadioThemeData(),
+  // scrollbarTheme: ScrollbarThemeData(),
+  // sliderTheme: SliderThemeData(),
+  // snackBarTheme: SnackBarThemeData(),
+  // switchTheme: SwitchThemeData(),
+  // tabBarTheme: TabBarTheme(),
+  // textButtonTheme: TextButtonThemeData(),
+  // textSelectionTheme: TextSelectionThemeData(),
+  // timePickerTheme: TimePickerThemeData(),
+  // toggleButtonsTheme: ToggleButtonsThemeData(),
+  // tooltipTheme: TooltipThemeData(),
 );

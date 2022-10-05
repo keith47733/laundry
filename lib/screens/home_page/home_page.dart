@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../styles/layout.dart';
 import '../../models/controllers/c_home.dart';
 import '../../models/controllers/c_user.dart';
 import '../../services/session.dart';
-import '../../theme/layout.dart';
 import '../add_page/add_page.dart';
 import '../login_page/login_page.dart';
 import '../search_page/search_page.dart';
@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Palette.palette[50],
       appBar: AppBar(
         title: const Text('Lord of the Linens'),
         actions: [
@@ -58,7 +57,7 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(
               Layout.appSpacing,
-              0,
+              Layout.appSpacing / 2,
               Layout.appSpacing,
               Layout.appSpacing * 2,
             ),
@@ -73,23 +72,23 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        // color: Palette.palette[300],
         child: Row(
-          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.menu),
-              // color: Colors.transparent,
-              onPressed: () {},
+            Visibility(
+              maintainAnimation: true,
+              maintainSize: true,
+              maintainState: true,
+              visible: false,
+              child: IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {},
+              ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        elevation: 5.0,
-        // backgroundColor: Colors.lightBlue[100],
         child: const Icon(Icons.add),
         onPressed: () {
           Get.to(() => AddPage())?.then(

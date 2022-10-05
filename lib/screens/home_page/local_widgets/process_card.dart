@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/process.dart';
-import '../../../theme/layout.dart';
+import '../../../styles/layout.dart';
 import '../../../widgets/card_title.dart';
 import 'process_menu_item.dart';
 
@@ -14,10 +14,6 @@ Widget processCard() {
       0,
     ),
     child: Card(
-      elevation: Layout.cardElevation,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Layout.appRadius),
-      ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(
           Layout.appSpacing,
