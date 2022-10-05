@@ -2,11 +2,11 @@ import 'package:d_input/d_input.dart';
 import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:laundry/models/controllers/c_search.dart';
-import 'package:laundry/models/sources/source_laundry.dart';
-import 'package:laundry/widgets/detail_laundry.dart';
 
+import '../../models/controllers/c_search.dart';
 import '../../models/laundry.dart';
+import '../../models/sources/source_laundry.dart';
+import '../status_page/status_page.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -59,7 +59,7 @@ class SearchPage extends StatelessWidget {
         () {
           if (cSearch.data.id == null) return DView.empty('Laundry not found');
           Laundry laundry = cSearch.data;
-          return DetailLaundry(laundry: laundry);
+          return StatusPage(laundry: laundry);
         },
       ),
     );

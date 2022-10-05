@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../theme/layout.dart';
+import '../../../styles/layout.dart';
 
 Widget loginTitle(String text) {
   return Padding(

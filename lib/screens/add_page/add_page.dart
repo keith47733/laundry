@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:laundry/widgets/card_title.dart';
 
+import '../../../styles/layout.dart';
 import '../../models/laundry.dart';
 import '../../models/sources/source_laundry.dart';
-import '../../theme/layout.dart';
 import '../../widgets/input_box.dart';
 
 class AddPage extends StatelessWidget {
@@ -51,7 +51,7 @@ class AddPage extends StatelessWidget {
           Layout.appSpacing,
         ),
         child: Card(
-          elevation: Layout.cardElevation,
+          elevation: Layout.appElevation,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(Layout.appRadius),
           ),

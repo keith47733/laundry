@@ -2,9 +2,11 @@ import 'package:d_view/d_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:laundry/models/laundry.dart';
 
 import 'screens/home_page/home_page.dart';
 import 'screens/login_page/login_page.dart';
+import 'screens/status_page/status_page.dart';
 import 'services/firebase_options.dart';
 import 'services/session.dart';
 import 'theme/app_theme.dart';
@@ -23,11 +25,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+//initialRoute: '/',
       debugShowCheckedModeBanner: false,
       title: 'Lord of the Linens',
-			theme: lightTheme,
-			darkTheme: darkTheme,
-			themeMode: ThemeMode.dark,
+      theme: lightTheme,
+      //darkTheme: darkTheme,
+      themeMode: ThemeMode.light,
       home: FutureBuilder(
         future: Session.getUser(),
         builder: (context, AsyncSnapshot snapshot) {

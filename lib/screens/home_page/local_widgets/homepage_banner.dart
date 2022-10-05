@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/layout.dart';
+import '../../../styles/layout.dart';
 
 Widget homepageBanner() {
   return Padding(
@@ -11,10 +11,6 @@ Widget homepageBanner() {
       0,
     ),
     child: Card(
-      elevation: Layout.cardElevation,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Layout.appRadius),
-      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Layout.appRadius),
         child: const Image(

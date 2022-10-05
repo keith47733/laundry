@@ -5,11 +5,16 @@ import 'package:get/get.dart';
 import '../../../models/controllers/c_home.dart';
 import '../../../models/controllers/c_user.dart';
 import '../../../models/process.dart';
-import '../../../theme/layout.dart';
-import '../../../utils/format.dart';
+import '../../../styles/format.dart';
+import '../../../styles/layout.dart';
+import '../../../theme/app_theme.dart';
 import '../../../widgets/card_title.dart';
 
-Widget dailySummaryCard(BuildContext context, CUser cUser, CHome cHome) {
+Widget dailySummaryCard(
+  BuildContext context,
+  CUser cUser,
+  CHome cHome,
+) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(
       0,
@@ -18,10 +23,6 @@ Widget dailySummaryCard(BuildContext context, CUser cUser, CHome cHome) {
       0,
     ),
     child: Card(
-      elevation: Layout.cardElevation,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Layout.appRadius),
-      ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(
           Layout.appSpacing,
@@ -46,8 +47,19 @@ Widget dailySummaryCard(BuildContext context, CUser cUser, CHome cHome) {
                 ),
               ],
             ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(
+                0,
+                0,
+                0,
+                Layout.appSpacing,
+              ),
+              child: Divider(),
+            ),
             Padding(
-              padding: const EdgeInsets.only(bottom: Layout.appSpacing),
+              padding: const EdgeInsets.only(
+                bottom: Layout.appSpacing,
+              ),
               child: Row(
                 children: [
                   const Icon(Icons.navigate_before),
@@ -73,7 +85,7 @@ Widget dailySummaryCard(BuildContext context, CUser cUser, CHome cHome) {
                         child: Container(
                           width: 100.0,
                           decoration: BoxDecoration(
-                            // color: Colors.lightBlue[100],
+                            color: lighten(color2, 30),
                             borderRadius: BorderRadius.circular(Layout.appRadius),
                           ),
                           alignment: Alignment.center,
@@ -104,9 +116,8 @@ Widget dailySummaryCard(BuildContext context, CUser cUser, CHome cHome) {
                               index == Process.listToday.length - 1 ? 0 : 4,
                             ),
                             child: Ink(
-                              // color: Palette.palette[200],
                               decoration: ShapeDecoration(
-                                // color: Colors.white.withOpacity(0.5),
+                                color: lighten(color2, 75),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Layout.appRadius)),
                               ),
                               child: Padding(

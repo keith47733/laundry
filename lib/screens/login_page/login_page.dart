@@ -6,11 +6,11 @@ import 'package:get/get.dart';
 
 import '../../models/sources/source_user.dart';
 import '../../services/session.dart';
-import '../../theme/layout.dart';
-import 'local_widgets/login_input_box.dart';
+import '../../styles/layout.dart';
 import '../home_page/home_page.dart';
 import '../search_page/search_page.dart';
 import 'local_widgets/background_image.dart';
+import 'local_widgets/login_input_box.dart';
 import 'local_widgets/login_title.dart';
 
 class LoginPage extends StatelessWidget {
@@ -38,8 +38,8 @@ class LoginPage extends StatelessWidget {
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                     child: Container(
-                      decoration: const BoxDecoration(
-                          // color: Colors.black.withOpacity(0.4),
+                      decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.4),
                           ),
                       child: ListView(
                         padding: const EdgeInsets.all(Layout.appSpacing),
