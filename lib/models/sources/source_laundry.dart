@@ -25,17 +25,18 @@ class SourceLaundry {
     data['Today'] = result.size;
 
     for (var e in result.docs) {
-      if (e.data()['status'] == Process.queued) {
+      if (e.data()['status'] == Process.queue) {
         data['Queued'] = data['Queued']! + 1;
         continue;
       }
-      if (e.data()['status'] == Process.washing ||
-          e.data()['status'] == Process.drying ||
-          e.data()['status'] == Process.beingFolded) {
+      if (e.data()['status'] == Process.wash ||
+          e.data()['status'] == Process.dry ||
+          e.data()['status'] == Process.fold) {
         data['Processing'] = data['Processing']! + 1;
         continue;
       }
-      if (e.data()['status'] == Process.done) {
+      if (e.data()['status'] == Process.done ||
+			    e.data()['status'] == Process.delivered) {
         data['Done'] = data['Done']! + 1;
         continue;
       }
@@ -66,7 +67,7 @@ class SourceLaundry {
 
   static Future<bool> updateStatus(String id, String newStatus) async {
     await _dbRef.doc(id).update({'status': newStatus});
-    if (newStatus == Process.washing) {
+    if (newStatus == Process.wash) {
       await _dbRef.doc(id).update({'start_date': DateTime.now().microsecondsSinceEpoch});
     }
     if (newStatus == Process.done) {

@@ -3,11 +3,12 @@
 import 'package:flutter/material.dart';
 
 import '../styles/layout.dart';
+import '../styles/layout.dart';
 
-final Color color1 = hexToColor('7895B2');
-final Color color2 = hexToColor('AEBDCA');
-final Color color3 = hexToColor('E8DFCA');
-final Color color4 = hexToColor('F5EFE6');
+final Color color1 = hexToColor('7895B2'); // darkest blue
+final Color color2 = hexToColor('AEBDCA'); // medium blue
+final Color color3 = hexToColor('E8DFCA'); // light off brown
+final Color color4 = hexToColor('F5EFE6'); // light blue
 
 Color hexToColor(String code) {
   return Color(int.parse(code.substring(0, 6), radix: 16) + 0xFF000000);
@@ -32,13 +33,13 @@ ThemeData lightTheme = ThemeData(
   // applyElevationOverlayColor: false,
   brightness: Brightness.light,
   // fixTextFieldOutlineLabel: true,
-  fontFamily: 'Roboto',
+  fontFamily: 'InterTight',
   // materialTapTargetSize: MaterialTapTargetSize.padded,
   platform: TargetPlatform.android,
   // splashFactory: InkSplash.splashFactory,
   // typography: Typography.material2021(),
   // useMaterial3: true,
-  // visualDensity: VisualDensity(vertical: 1, horizontal: 1),
+  visualDensity: VisualDensity.adaptivePlatformDensity,
 
   // COLOR SCHEME
   // Create color scheme for app theme
@@ -83,8 +84,8 @@ ThemeData lightTheme = ThemeData(
   // cardColor: Colors.white,
   // colorSchemeSeed: Colors.white,
   // dialogBackgroundColor: Colors.white,
-  // disabledColor: Colors.white,
-  dividerColor: color1,
+  disabledColor: Colors.grey[200],
+  dividerColor: color2,
   // errorColor: Colors.white,
   // focusColor: Colors.white,
   // highlightColor: Colors.white,
@@ -94,43 +95,43 @@ ThemeData lightTheme = ThemeData(
   // primaryColor: Colors.white,
   // primaryColorDark: Colors.white,
   // primaryColorLight: Colors.white,
-  scaffoldBackgroundColor: lighten(color4, 60),
+  scaffoldBackgroundColor: lighten(color4, 80),
   // secondaryHeaderColor: Colors.white,
   // splashColor: Colors.white,
   // toggleableActiveColor: Colors.white,
   // unselectedWidgetColor: Colors.white,
 
 // THEMES FOR PRE-DEFINED FONT TYPES
-  // textTheme: TextTheme(
-  //   bodyLarge: TextStyle(),
-  //   bodyMedium: TextStyle(),
-  //   bodySmall: TextStyle(),
-  //   bodyText1: TextStyle(),
-  //   bodyText2: TextStyle(),
-  //   button: TextStyle(),
-  //   caption: TextStyle(),
-  //   displayLarge: TextStyle(),
-  //   displayMedium: TextStyle(),
-  //   displaySmall: TextStyle(),
-  //   headline1: TextStyle(),
-  //   headline2: TextStyle(),
-  //   headline3: TextStyle(),
-  //   headline4: TextStyle(),
-  //   headline5: TextStyle(),
-  //   headline6: TextStyle(),
-  //   headlineLarge: TextStyle(),
-  //   headlineMedium: TextStyle(),
-  //   headlineSmall: TextStyle(),
-  //   labelLarge: TextStyle(),
-  //   labelMedium: TextStyle(),
-  //   labelSmall: TextStyle(),
-  //   overline: TextStyle(),
-  //   subtitle1: TextStyle(),
-  //   subtitle2: TextStyle(),
-  //   titleLarge: TextStyle(),
-  //   titleMedium: TextStyle(),
-  //   titleSmall: TextStyle(),
-  // ),
+  textTheme: TextTheme(
+    bodyLarge: TextStyle(fontWeight: FontWeight.bold),
+    bodyMedium: TextStyle(),
+    bodySmall: TextStyle(),
+    //   bodyText1: TextStyle(),
+    //   bodyText2: TextStyle(),
+    //   button: TextStyle(),
+    //   caption: TextStyle(),
+    //   displayLarge: TextStyle(),
+    //   displayMedium: TextStyle(),
+    //   displaySmall: TextStyle(),
+    //   headline1: TextStyle(),
+    //   headline2: TextStyle(),
+    //   headline3: TextStyle(),
+    //   headline4: TextStyle(),
+    //   headline5: TextStyle(),
+    //   headline6: TextStyle(),
+    //   headlineLarge: TextStyle(),
+    //   headlineMedium: TextStyle(),
+    //   headlineSmall: TextStyle(),
+    //   labelLarge: TextStyle(),
+    //   labelMedium: TextStyle(),
+    //   labelSmall: TextStyle(),
+    //   overline: TextStyle(),
+    //   subtitle1: TextStyle(),
+    //   subtitle2: TextStyle(),
+    //   titleLarge: TextStyle(),
+    //   titleMedium: TextStyle(),
+    //   titleSmall: TextStyle(),
+  ),
 
   // WIDGET THEMES
   // Theme properties override custom colors and text
@@ -154,9 +155,10 @@ ThemeData lightTheme = ThemeData(
   // buttonBarTheme: ButtonBarThemeData(),
   // buttonTheme: ButtonThemeData(),
   cardTheme: CardTheme(
+    color: lighten(color2, 90),
     elevation: Layout.appElevation,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(Layout.appRadius),
+      borderRadius: BorderRadius.circular(Layout.appRadius * 1.5),
     ),
   ),
   // checkboxTheme: CheckboxThemeData(),
@@ -165,11 +167,20 @@ ThemeData lightTheme = ThemeData(
   // dialogTheme: DialogTheme(),
   // dividerTheme: DividerThemeData(),
   // drawerTheme: DrawerThemeData(),
-  // elevatedButtonTheme: ElevatedButtonThemeData(),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+      elevation: MaterialStatePropertyAll(Layout.appElevation),
+      backgroundColor: MaterialStatePropertyAll<Color>(color1),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Layout.appRadius * 2),
+        ),
+      ),
+    ),
+  ),
   // expansionTileTheme: ExpansionTileThemeData(),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: color2,
-    foregroundColor: lighten(color4, 80),
   ),
   iconTheme: IconThemeData(
     color: darken(color1, 40),

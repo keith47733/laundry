@@ -6,9 +6,9 @@ Widget homepageBanner() {
   return Padding(
     padding: const EdgeInsets.fromLTRB(
       0,
-      Layout.appSpacing,
+      Layout.appSpacing / 2,
       0,
-      0,
+      Layout.appSpacing / 2,
     ),
     child: Card(
       child: ClipRRect(

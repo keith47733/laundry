@@ -8,9 +8,8 @@ Widget loginTitle(String text) {
     padding: const EdgeInsets.all(Layout.appSpacing),
     child: Text(
       'Login',
-      style: Theme.of(Get.context!).textTheme.headline3!.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+      style: Theme.of(Get.context!).textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.bold),
     ),
   );
 }

@@ -1,9 +1,7 @@
 import 'package:d_info/d_info.dart';
-import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:laundry/widgets/card_title.dart';
 
 import '../../../styles/layout.dart';
 import '../../models/laundry.dart';
@@ -22,19 +20,19 @@ class AddPage extends StatelessWidget {
       Laundry(
         weight: double.parse(controllerWeight.text),
         price: double.parse(controllerPrice.text),
-        status: 'Queued',
+        status: 'Queue',
         queueDate: DateTime.now(),
         date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
         customerName: controllerCustomerName.text,
       ),
     );
     if (success) {
-      DInfo.dialogSuccess('Successfully added new laundry');
+      DInfo.dialogSuccess('Successfully added laundry order');
       DInfo.closeDialog(actionAfterClose: () {
         Get.back(result: true);
       });
     } else {
-      DInfo.dialogError('Failed to add new laundry');
+      DInfo.dialogError('Failed to add laundry order');
       DInfo.closeDialog();
     }
   }
@@ -42,7 +40,7 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DView.appBarLeft('Add New'),
+      appBar: AppBar(title: const Text('Add Laundry Order')),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(
           Layout.appSpacing,
@@ -51,38 +49,51 @@ class AddPage extends StatelessWidget {
           Layout.appSpacing,
         ),
         child: Card(
-          elevation: Layout.appElevation,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Layout.appRadius),
-          ),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(
               Layout.appSpacing,
-              0,
+              Layout.appSpacing,
               Layout.appSpacing,
               Layout.appSpacing,
             ),
             child: ListView(
-              shrinkWrap: true,
+							shrinkWrap: true,
               children: [
-                cardTitle('Add Laundry Order'),
-                inputBox(context, 'Customer name:', 'Enter the customer name', controllerCustomerName),
-                inputBox(context, 'Weight:', 'Enter the weight [kg]', controllerWeight),
-                inputBox(context, 'Price:', 'Enter the price [\$]', controllerPrice),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    0,
+                    0,
+                    0,
+                    Layout.appSpacing * 2,
+                  ),
+                  child: Text('Add Laundry Order', style: Theme.of(context).textTheme.bodyLarge),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: Layout.appSpacing),
+                  child: inputBox(context, 'Customer name:', 'Enter the customer name', controllerCustomerName),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: Layout.appSpacing),
+                  child: inputBox(context, 'Weight:', 'Enter the weight [kg]', controllerWeight),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: Layout.appSpacing),
+                  child: inputBox(context, 'Price:', 'Enter the price [\$]', controllerPrice),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(
                     0,
                     Layout.appSpacing,
                     0,
-                    Layout.appSpacing / 2,
+                    0,
                   ),
                   child: ElevatedButton(
                     onPressed: addLaundryOrder,
-                    child: const Padding(
-                      padding: EdgeInsets.all(Layout.appSpacing / 2),
+                    child: Padding(
+                      padding: const EdgeInsets.all(Layout.appSpacing),
                       child: Text(
                         'Add Laundry Order',
-                        textScaleFactor: 0.75,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ),

@@ -32,16 +32,14 @@ class _ProcessPageState extends State<ProcessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('${widget.status} Orders'),
-      ),
+      appBar: AppBar(title: Text(widget.status)),
       body: GetBuilder<CWhereStatus>(
         builder: (_) {
           if (_.list.isEmpty) {
             return const Center(
               child: Image(
                 image: AssetImage('./assets/icons/no orders.png'),
-                height: Layout.appSpacing * 2.5,
+                height: Layout.appSpacing * 12,
                 fit: BoxFit.cover,
               ),
             );
@@ -53,73 +51,55 @@ class _ProcessPageState extends State<ProcessPage> {
               return Padding(
                 padding: const EdgeInsets.fromLTRB(
                   Layout.appSpacing,
-                  Layout.appSpacing / 2,
+                  Layout.appSpacing,
                   Layout.appSpacing,
                   0,
                 ),
-                child: ListTile(
-                    onTap: () {
-                      Get.off(() => StatusPage(laundry: laundry))?.then((value) {
-                        if (value ?? false) {
-                          refresh();
-                        }
-                    });
-                  },
-                  leading: Ink(
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Layout.appRadius)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(Layout.appSpacing / 4),
-                      child: Image(
-                        image: AssetImage('./assets/icons/${laundry.status!.toLowerCase()}.png'),
-                        height: Layout.appSpacing * 5,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  horizontalTitleGap: 15,
-                  title: Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      Layout.appSpacing / 2,
-                      Layout.appSpacing / 2,
-                      Layout.appSpacing / 2,
-                      Layout.appSpacing / 2,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                            textScaleFactor: 0.75,
-                            laundry.customerName!,
-                            style: Theme.of(Get.context!).textTheme.headline6!),
-                      ],
-                    ),
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      Layout.appSpacing / 2,
-                      Layout.appSpacing / 4,
-                      Layout.appSpacing / 2,
-                      Layout.appSpacing / 2,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                            textScaleFactor: 0.6,
-                            Format.date(laundry.queueDate!),
-                            style: Theme.of(Get.context!).textTheme.headline6!),
-                        Text(
-                            textScaleFactor: 0.6,
-                            Format.time(laundry.queueDate!),
-                            style: Theme.of(Get.context!).textTheme.headline6!),
-                      ],
-                    ),
-                  ),
-                  trailing: const Icon(Icons.navigate_next),
-                ),
+                child: IntrinsicHeight(
+									child: ListTile(
+										onTap: () {
+											Get.off(() => StatusPage(laundry: laundry))?.then(
+												(value) {
+													if (value ?? false) {
+														refresh();
+													}
+												},
+											);
+										},
+										leading: Image(
+											image: AssetImage('./assets/icons/${laundry.status!.toLowerCase()}.png'),
+											fit: BoxFit.fill,
+										),
+										title: Padding(
+											padding: const EdgeInsets.fromLTRB(
+												0,
+												Layout.appSpacing / 2,
+												0,
+												0,
+											),
+											child: Text(
+												laundry.customerName!,
+												style: Theme.of(Get.context!).textTheme.bodyMedium,
+											),
+										),
+										subtitle: Padding(
+											padding: const EdgeInsets.fromLTRB(
+												0,
+												Layout.appSpacing / 4,
+												0,
+												Layout.appSpacing,
+											),
+											child: Row(
+												mainAxisAlignment: MainAxisAlignment.spaceBetween,
+												children: [
+													Text(Format.date(laundry.queueDate!), style: Theme.of(Get.context!).textTheme.bodySmall),
+													Text(Format.time(laundry.queueDate!), style: Theme.of(Get.context!).textTheme.bodySmall),
+												],
+											),
+										),
+										trailing: const Icon(Icons.navigate_next),
+									),
+								),
               );
             }),
           );

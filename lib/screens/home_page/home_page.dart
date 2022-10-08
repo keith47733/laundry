@@ -7,7 +7,6 @@ import '../../models/controllers/c_user.dart';
 import '../../services/session.dart';
 import '../add_page/add_page.dart';
 import '../login_page/login_page.dart';
-import '../search_page/search_page.dart';
 import 'local_widgets/daily_summary_card.dart';
 import 'local_widgets/homepage_banner.dart';
 import 'local_widgets/process_card.dart';
@@ -30,23 +29,8 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Lord of the Linens'),
         actions: [
           IconButton(
-            onPressed: () {
-              Get.to(() => const SearchPage());
-            },
-            icon: const Icon(Icons.search),
-          ),
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              if (value == 'logout') {
-                logoutUser();
-              }
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'logout',
-                child: Text('Logout'),
-              ),
-            ],
+            onPressed: logoutUser,
+            icon: const Icon(Icons.logout_sharp),
           ),
         ],
       ),
@@ -57,9 +41,9 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(
               Layout.appSpacing,
-              Layout.appSpacing / 2,
               Layout.appSpacing,
-              Layout.appSpacing * 2,
+              Layout.appSpacing,
+              Layout.appSpacing,
             ),
             child: Column(
               children: [

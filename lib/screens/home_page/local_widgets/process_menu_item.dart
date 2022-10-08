@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../styles/layout.dart';
-import '../../../theme/app_theme.dart';
 import '../../process_page/process_page.dart';
 
 Widget processMenuItem(String itemProcess) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(
       0,
-      0,
+      Layout.appSpacing / 2,
       0,
       Layout.appSpacing / 2,
     ),
@@ -17,24 +16,21 @@ Widget processMenuItem(String itemProcess) {
       onTap: () {
         Get.to(() => ProcessPage(status: itemProcess));
       },
-      leading: Ink(
-        decoration: ShapeDecoration(
-          color: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Layout.appRadius)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(Layout.appSpacing / 4),
-          child: Image(
-            image: AssetImage('./assets/icons/${itemProcess.toLowerCase()}.png'),
-            height: Layout.appSpacing * 2,
-            fit: BoxFit.cover,
-          ),
-        ),
+      leading: Image(
+      	image: AssetImage('./assets/icons/${itemProcess.toLowerCase()}.png'),
+      	fit: BoxFit.fill,
       ),
-      title: Text(
-        textScaleFactor: 0.8,
-        itemProcess,
-        style: Theme.of(Get.context!).textTheme.headline6,
+      title: Padding(
+        padding: const EdgeInsets.fromLTRB(
+					0,
+					Layout.appSpacing,
+					0,
+					Layout.appSpacing,
+				),
+        child: Text(
+          itemProcess,
+          style: Theme.of(Get.context!).textTheme.bodyMedium,
+        ),
       ),
       trailing: const Icon(
         Icons.navigate_next,

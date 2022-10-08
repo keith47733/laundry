@@ -7,11 +7,11 @@ import '../../models/laundry.dart';
 import '../../styles/format.dart';
 import '../../styles/layout.dart';
 import '../../theme/app_theme.dart';
-import '../../widgets/card_title.dart';
 
 class StatusPage extends StatefulWidget {
   StatusPage({super.key, required this.laundry});
   final Laundry laundry;
+
   var isQueued = false;
   var isProcessing = false;
   var isDone = false;
@@ -41,45 +41,90 @@ class _StatusPageState extends State<StatusPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(Layout.appSpacing),
+          padding: const EdgeInsets.fromLTRB(
+            Layout.appSpacing,
+            Layout.appSpacing,
+            Layout.appSpacing,
+            Layout.appSpacing,
+          ),
           child: Card(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(
                 Layout.appSpacing,
-                0,
+                Layout.appSpacing,
                 Layout.appSpacing,
                 Layout.appSpacing,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      cardTitle(widget.laundry.customerName!),
-                      Text('[${widget.laundry.id!}]'),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('${widget.laundry.weight} kg'),
-                      Text(Format.currency(widget.laundry.price!)),
-                    ],
-                  ),
-                  const Divider(),
                   Padding(
-                    padding: const EdgeInsets.all(Layout.appSpacing),
+                    padding: const EdgeInsets.fromLTRB(
+                      0,
+                      0,
+                      0,
+                      Layout.appSpacing / 2,
+                    ),
+                    child: Text(
+                      widget.laundry.customerName!,
+                      style: Theme.of(Get.context!).textTheme.bodyLarge,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      0,
+                      0,
+                      0,
+                      Layout.appSpacing,
+                    ),
+                    child: Text(
+                      '[${widget.laundry.id!}]',
+                      style: Theme.of(Get.context!).textTheme.bodySmall,
+                      textScaleFactor: 1.5,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      0,
+                      0,
+                      0,
+                      Layout.appSpacing / 4,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('${widget.laundry.weight} kg', style: Theme.of(context).textTheme.bodyMedium),
+                        Text(Format.currency(widget.laundry.price!), style: Theme.of(context).textTheme.bodyMedium),
+                      ],
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      0,
+                      Layout.appSpacing / 2,
+                      0,
+                      Layout.appSpacing / 2,
+                    ),
+                    child: Divider(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      0,
+                      Layout.appSpacing / 2,
+                      0,
+                      Layout.appSpacing / 4,
+                    ),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: Colors.orange,
                         borderRadius: BorderRadius.circular(Layout.appRadius),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(Layout.appSpacing),
                         child: Text(
                           widget.laundry.status!,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: lighten(color1, 80)),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -92,57 +137,109 @@ class _StatusPageState extends State<StatusPage> {
                           width: constraints.maxWidth * 0.5,
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(
-                              Layout.appSpacing / 2,
-                              Layout.appSpacing / 2,
-                              Layout.appSpacing / 2,
+                              0,
+                              0,
+                              0,
                               0,
                             ),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
-                                  width: constraints.maxWidth,
-                                  child: const ElevatedButton(
-                                    onPressed: null,
-                                    child: Text('Queued'),
+                                Padding(
+                                  padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                  child: SizedBox(
+                                    width: constraints.maxWidth,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        disabledBackgroundColor: Colors.grey[300],
+                                      ),
+                                      onPressed: null,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                        child: Text('Queue', style: Theme.of(context).textTheme.bodyMedium),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: constraints.maxWidth,
-                                  child: ElevatedButton(
-                                    onPressed:
-                                        widget.laundry.status! == 'Queued' ? () => _updateStatus('Washing') : null,
-                                    child: const Text('Start Washing'),
+                                Padding(
+                                  padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                  child: SizedBox(
+                                    width: constraints.maxWidth,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        disabledBackgroundColor: Colors.grey[300],
+                                      ),
+                                      onPressed: widget.laundry.status! == 'Queue' ? () => _updateStatus('Wash') : null,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                        child: Text('Wash', style: Theme.of(context).textTheme.bodyMedium),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: constraints.maxWidth,
-                                  child: ElevatedButton(
-                                    onPressed:
-                                        widget.laundry.status! == 'Washing' ? () => _updateStatus('Drying') : null,
-                                    child: const Text('Start Drying'),
+                                Padding(
+                                  padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                  child: SizedBox(
+                                    width: constraints.maxWidth,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        disabledBackgroundColor: Colors.grey[300],
+                                      ),
+                                      onPressed: widget.laundry.status! == 'Wash' ? () => _updateStatus('Dry') : null,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                        child: Text('Dry', style: Theme.of(context).textTheme.bodyMedium),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: constraints.maxWidth,
-                                  child: ElevatedButton(
-                                    onPressed:
-                                        widget.laundry.status! == 'Drying' ? () => _updateStatus('Being Folded') : null,
-                                    child: const Text('Start Folding'),
+                                Padding(
+                                  padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                  child: SizedBox(
+                                    width: constraints.maxWidth,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        disabledBackgroundColor: Colors.grey[300],
+                                      ),
+                                      onPressed: widget.laundry.status! == 'Dry' ? () => _updateStatus('Fold') : null,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                        child: Text('Fold', style: Theme.of(context).textTheme.bodyMedium),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: constraints.maxWidth,
-                                  child: ElevatedButton(
-                                    onPressed:
-                                        widget.laundry.status! == 'Being Folded' ? () => _updateStatus('Done') : null,
-                                    child: const Text('Completed'),
+                                Padding(
+                                  padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                  child: SizedBox(
+                                    width: constraints.maxWidth,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        disabledBackgroundColor: Colors.grey[300],
+                                      ),
+                                      onPressed: widget.laundry.status! == 'Fold' ? () => _updateStatus('Done') : null,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                        child: Text('Done', style: Theme.of(context).textTheme.bodyMedium),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: constraints.maxWidth,
-                                  child: ElevatedButton(
-                                    onPressed: widget.laundry.status! == 'Done' ? () => _updateStatus('Taken') : null,
-                                    child: const Text('Picked up By Customer'),
+                                Padding(
+                                  padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                  child: SizedBox(
+                                    width: constraints.maxWidth,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        disabledBackgroundColor: Colors.grey[300],
+                                      ),
+                                      onPressed:
+                                          widget.laundry.status! == 'Done' ? () => _updateStatus('Delivered') : null,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(Layout.appSpacing / 2),
+                                        child: Text('Delivered', style: Theme.of(context).textTheme.bodyMedium),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -166,16 +263,18 @@ class _StatusPageState extends State<StatusPage> {
                                         width: constraints.maxWidth,
                                         margin: const EdgeInsets.only(bottom: Layout.appSpacing),
                                         decoration: BoxDecoration(
-                                          color: color2,
+                                          color: lighten(Colors.green, 30),
                                           borderRadius: BorderRadius.circular(Layout.appRadius),
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(Layout.appSpacing),
                                           child: Column(
                                             children: [
-                                              const Text('Queued'),
-                                              Text(Format.date(widget.laundry.queueDate!)),
-                                              Text(Format.time(widget.laundry.queueDate!)),
+                                              Text('Queued', style: Theme.of(context).textTheme.bodyMedium),
+                                              Text(Format.date(widget.laundry.queueDate!),
+                                                  style: Theme.of(context).textTheme.bodySmall),
+                                              Text(Format.time(widget.laundry.queueDate!),
+                                                  style: Theme.of(context).textTheme.bodySmall),
                                             ],
                                           ),
                                         ),
@@ -186,16 +285,18 @@ class _StatusPageState extends State<StatusPage> {
                                         width: constraints.maxWidth,
                                         margin: const EdgeInsets.only(bottom: Layout.appSpacing),
                                         decoration: BoxDecoration(
-                                          color: color2,
+                                          color: Colors.green,
                                           borderRadius: BorderRadius.circular(Layout.appRadius),
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(Layout.appSpacing),
                                           child: Column(
                                             children: [
-                                              const Text('Processing'),
-                                              Text(Format.date(widget.laundry.startDate!)),
-                                              Text(Format.time(widget.laundry.startDate!)),
+                                              Text('Processing', style: Theme.of(context).textTheme.bodyMedium),
+                                              Text(Format.date(widget.laundry.startDate!),
+                                                  style: Theme.of(context).textTheme.bodySmall),
+                                              Text(Format.time(widget.laundry.startDate!),
+                                                  style: Theme.of(context).textTheme.bodySmall),
                                             ],
                                           ),
                                         ),
@@ -205,16 +306,18 @@ class _StatusPageState extends State<StatusPage> {
                                     ? Container(
                                         width: constraints.maxWidth,
                                         decoration: BoxDecoration(
-                                          color: color2,
+                                          color: darken(Colors.green, 30),
                                           borderRadius: BorderRadius.circular(Layout.appRadius),
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(Layout.appSpacing),
                                           child: Column(
                                             children: [
-                                              const Text('Completed'),
-                                              Text(Format.date(widget.laundry.endDate!)),
-                                              Text(Format.time(widget.laundry.endDate!)),
+                                              Text('Completed', style: Theme.of(context).textTheme.bodyMedium),
+                                              Text(Format.date(widget.laundry.endDate!),
+                                                  style: Theme.of(context).textTheme.bodySmall),
+                                              Text(Format.time(widget.laundry.endDate!),
+                                                  style: Theme.of(context).textTheme.bodySmall),
                                             ],
                                           ),
                                         ),
@@ -246,7 +349,7 @@ class _StatusPageState extends State<StatusPage> {
           setState(
             () {
               widget.laundry.status = newStatus;
-              if (newStatus == 'Washing') {
+              if (newStatus == 'Wash') {
                 widget.laundry.startDate = DateTime.now();
               }
               if (newStatus == 'Done') {
