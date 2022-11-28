@@ -6,11 +6,11 @@ import 'package:get/get.dart';
 
 import '../../models/sources/source_user.dart';
 import '../../services/session.dart';
+import '../../styles/app_theme.dart';
 import '../../styles/layout.dart';
-import '../../theme/app_theme.dart';
 import '../home_page/home_page.dart';
-import 'local_widgets/background_image.dart';
-import 'local_widgets/login_input_box.dart';
+import 'background_image.dart';
+import 'login_input_box.dart';
 
 class LoginPage extends StatelessWidget {
   final usernameController = TextEditingController();
@@ -18,105 +18,9 @@ class LoginPage extends StatelessWidget {
 
   LoginPage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          backgroundImage('./assets/images/login_background.jpg'),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              Layout.appSpacing,
-              Layout.appSpacing * 4,
-              Layout.appSpacing,
-              Layout.appSpacing,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(Layout.appRadius),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.4),
-                      ),
-                      child: ListView(
-                        padding: const EdgeInsets.all(Layout.appSpacing),
-                        shrinkWrap: true,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              0,
-                              Layout.appSpacing / 2,
-                              0,
-                              Layout.appSpacing * 2,
-                            ),
-                            child: Text('Login', style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: color4)),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              0,
-                              0,
-                              0,
-                              Layout.appSpacing,
-                            ),
-                            child: loginInputBox(
-                              context,
-                              'Username:',
-                              'Enter your username',
-                              usernameController,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              0,
-                              0,
-                              0,
-                              Layout.appSpacing,
-                            ),
-                            child: loginInputBox(
-                              context,
-                              'Password:',
-                              'Enter your username',
-                              passwordController,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              0,
-                              Layout.appSpacing,
-                              0,
-                              Layout.appSpacing,
-                            ),
-                            child: ElevatedButton(
-                              onPressed: () => {
-                                login(),
-                              },
-                              child: const Padding(
-                                padding: EdgeInsets.all(Layout.appSpacing),
-                                child: Text('Login'),
-                              ),
-                            ),
-                          ),
-                        ], // ListView children
-                      ),
-                    ),
-                  ),
-                ),
-              ], // Column children
-            ),
-          ),
-        ], // Stack children
-      ),
-    );
-  }
-
   void login() async {
-    var user = await SourceUser.login(usernameController.text, passwordController.text);
+    var user = await SourceUser.login(
+        usernameController.text, passwordController.text);
     if (user == null) {
       DInfo.dialogError('Login failed');
       DInfo.closeDialog();
@@ -127,5 +31,75 @@ class LoginPage extends StatelessWidget {
         Get.off(() => const HomePage());
       });
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
+          backgroundImage('./assets/images/login_background.jpg'),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                vertical: Layout.SPACING * 4, horizontal: Layout.SPACING * 1.5),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(Layout.RADIUS),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.4),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Layout.SPACING * 1.5,
+                    ),
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        Text(
+                          'Lord of the Linens',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(color: color4),
+                        ),
+                        const SizedBox(height: Layout.SPACING * 2),
+                        loginInputBox(
+                          context,
+                          'Username:',
+                          'Enter your username',
+                          usernameController,
+                          TextInputAction.next,
+                        ),
+                        const SizedBox(height: Layout.SPACING * 1.25),
+                        loginInputBox(
+                          context,
+                          'Password:',
+                          'Enter your password',
+                          passwordController,
+                          TextInputAction.done,
+                        ),
+                        const SizedBox(height: Layout.SPACING * 2.5),
+                        ElevatedButton(
+                          onPressed: login,
+                          child: const Padding(
+                            padding: EdgeInsets.all(Layout.SPACING),
+                            child: Text('Login'),
+                          ),
+                        ),
+                        const SizedBox(height: Layout.SPACING * 2.25),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -10,48 +10,41 @@
 
 class Laundry {
   String? id;
+  String? customerName;
   double? weight;
   double? price;
-  String? status;
-  DateTime? queueDate;
-  String? date;
-  DateTime? startDate;
-  DateTime? endDate;
-  String? customerName;
+  String? created;
+  int? status;
+  List<String>? statusDate;
 
   Laundry({
     this.id,
+    this.customerName,
     this.weight,
     this.price,
+    this.created,
     this.status,
-    this.queueDate,
-    this.date,
-    this.startDate,
-    this.endDate,
-    this.customerName,
+    this.statusDate,
   });
 
-  factory Laundry.fromJson(Map<String, dynamic> json) => Laundry(
-        id: json["id"],
-        weight: json["weight"].toDouble(),
-        price: json["price"].toDouble(),
-        status: json["status"],
-        queueDate: DateTime.fromMicrosecondsSinceEpoch(json["queue_date"]),
-        date: json["date"],
-        startDate: json["start_date"] == null ? null : DateTime.fromMicrosecondsSinceEpoch(json["start_date"]),
-        endDate: json["end_date"] == null ? null : DateTime.fromMicrosecondsSinceEpoch(json["end_date"]),
-        customerName: json["customer_name"],
+  factory Laundry.fromJson(json) => Laundry(
+        id: json['id'],
+        customerName: json['customer_name'],
+        weight: json['weight'].toDouble(),
+        price: json['price'].toDouble(),
+        created: json['created'],
+        status: json['status'],
+        statusDate:
+            (json['status_date'] as Iterable).map((e) => e.toString()).toList(),
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "weight": weight,
-        "price": price,
-        "status": status,
-        "queue_date": queueDate!.microsecondsSinceEpoch,
-        "date": date,
-        "start_date": startDate == null ? null : startDate!.microsecondsSinceEpoch,
-        "end_date": endDate == null ? null : startDate!.microsecondsSinceEpoch,
-        "customer_name": customerName,
+  toJson() => {
+        'id': id,
+        'customer_name': customerName,
+        'weight': weight,
+        'price': price,
+        'created': created,
+        'status': status,
+        'status_date': statusDate,
       };
 }

@@ -7,7 +7,8 @@ import 'screens/home_page/home_page.dart';
 import 'screens/login_page/login_page.dart';
 import 'services/firebase_options.dart';
 import 'services/session.dart';
-import 'theme/app_theme.dart';
+import 'styles/layout.dart';
+import 'styles/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,24 +27,36 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         final MediaQueryData data = MediaQuery.of(context);
         return MediaQuery(
-          data: data.copyWith(textScaleFactor: data.textScaleFactor * 1.3),
+          data: data.copyWith(
+              textScaleFactor: data.textScaleFactor * Layout.TEXT_SCALE_FACTOR),
           child: child!,
         );
       },
       debugShowCheckedModeBanner: false,
       title: 'Lord of the Linens',
-      theme: lightTheme,
-      //darkTheme: darkTheme,
-			
+      theme: lightTheme.copyWith(
+        appBarTheme: AppBarTheme(
+          titleTextStyle: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(fontFamily: 'InterTight')
+              .apply(fontSizeFactor: 0.9),
+        ),
+      ),
+      // darkTheme: darkTheme,
       themeMode: ThemeMode.light,
       home: FutureBuilder(
         future: Session.getUser(),
         builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.data == null) {
+            return DView.nothing();
+          }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return DView.loadingCircle();
           }
-          if (snapshot.data == null) return DView.nothing();
-          if (snapshot.data!.id == null) return LoginPage();
+          if (snapshot.data.id == null) {
+            return LoginPage();
+          }
           return const HomePage();
         },
       ),

@@ -5,11 +5,11 @@ import '../../../styles/layout.dart';
 import '../../models/controllers/c_home.dart';
 import '../../models/controllers/c_user.dart';
 import '../../services/session.dart';
+import '../../styles/app_theme.dart';
 import '../add_page/add_page.dart';
 import '../login_page/login_page.dart';
-import 'local_widgets/daily_summary_card.dart';
-import 'local_widgets/homepage_banner.dart';
-import 'local_widgets/process_card.dart';
+import 'daily_summary_card.dart';
+import 'process_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,7 +30,9 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: logoutUser,
-            icon: const Icon(Icons.logout_sharp),
+            icon: const Icon(
+              Icons.logout,
+            ),
           ),
         ],
       ),
@@ -39,48 +41,32 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(
-              Layout.appSpacing,
-              Layout.appSpacing,
-              Layout.appSpacing,
-              Layout.appSpacing,
-            ),
+            padding: const EdgeInsets.all(Layout.SPACING),
             child: Column(
               children: [
-                homepageBanner(),
                 dailySummaryCard(context, cUser, cHome),
+                const SizedBox(height: Layout.SPACING),
                 processCard(),
               ], // Column children
             ),
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Visibility(
-              maintainAnimation: true,
-              maintainSize: true,
-              maintainState: true,
-              visible: false,
-              child: IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {},
-              ),
-            ),
-          ],
-        ),
+      bottomNavigationBar: const BottomAppBar(
+        elevation: Layout.ELEVATION,
+        notchMargin: Layout.SPACING / 2,
+        child: SizedBox(height: 50.0),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: lighten(Colors.green, 20),
         child: const Icon(Icons.add),
         onPressed: () {
           Get.to(() => AddPage())?.then(
             (value) {
               cHome.setAnalysis();
             },
-          ); // Page Navigation
-        }, // onPressed
+          );
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );

@@ -5,7 +5,7 @@ import '../sources/source_laundry.dart';
 
 class CWhereStatus extends GetxController {
   final list = <Laundry>[].obs;
-  setList(String status) async {
+  setList(int status) async {
     list.value = await SourceLaundry.whereStatus(status);
     update();
   }

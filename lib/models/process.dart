@@ -1,19 +1,19 @@
+// ignore_for_file: constant_identifier_names
+
 class Process {
-  static const queue = 'Queue';
-  static const wash = 'Wash';
-  static const dry = 'Dry';
-  static const fold = 'Fold';
-  static const done = 'Done';
-  static const delivered = 'Delivered';
+  static const List<String> STATUS_DESC = [
+    'Queued',
+    'Washing',
+    'Drying',
+    'Folding',
+    'Done',
+    'Delivered',
+  ];
 
-  static List listToday = ['Queued', 'Processing', 'Done'];
-
-  static List listMenu = [
-    queue,
-    wash,
-    dry,
-    fold,
-    done,
-    delivered,
+  static const List<String> SUMMARY_DESC = [
+    'Queued',
+    'Processing',
+    'Complete',
+    'Today',
   ];
 }
