@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/controllers/c_user.dart';
 import '../models/user.dart';
 
-class Session {
+class SharedPrefs {
   static final _cUser = Get.put(CUser());
 
   static Future<bool> saveUser(User user) async {
@@ -23,7 +23,7 @@ class Session {
 
   static Future<User> getUser() async {
     User user = User();
-		//Timer(const Duration(seconds: 3), () {});
+    //Timer(const Duration(seconds: 3), () {});
     final pref = await SharedPreferences.getInstance();
     String? stringUser = pref.getString('user');
     if (stringUser != null) {

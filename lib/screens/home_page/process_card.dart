@@ -13,7 +13,7 @@ Widget processCard() {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Process',
+            'Laundry Orders',
             style: Theme.of(Get.context!).textTheme.titleMedium,
           ),
           const SizedBox(height: Layout.SPACING / 2),

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../styles/layout.dart';
 import '../../models/controllers/c_home.dart';
 import '../../models/controllers/c_user.dart';
-import '../../services/session.dart';
+import '../../services/shared_prefs.dart';
 import '../../styles/app_theme.dart';
 import '../add_page/add_page.dart';
 import '../login_page/login_page.dart';
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   logoutUser() {
-    Session.clearUser();
+    SharedPrefs.clearUser();
     Get.off(() => LoginPage());
   }
 

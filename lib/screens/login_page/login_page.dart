@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../models/sources/source_user.dart';
-import '../../services/session.dart';
+import '../../services/shared_prefs.dart';
 import '../../styles/app_theme.dart';
 import '../../styles/layout.dart';
 import '../home_page/home_page.dart';
@@ -18,14 +18,15 @@ class LoginPage extends StatelessWidget {
 
   LoginPage({super.key});
 
-  void login() async {
+  void login(context) async {
+    FocusScope.of(context).unfocus();
     var user = await SourceUser.login(
         usernameController.text, passwordController.text);
     if (user == null) {
       DInfo.dialogError('Login failed');
       DInfo.closeDialog();
     } else {
-      Session.saveUser(user);
+      SharedPrefs.saveUser(user);
       DInfo.dialogSuccess('Login successful');
       DInfo.closeDialog(actionAfterClose: () {
         Get.off(() => const HomePage());
@@ -84,7 +85,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         const SizedBox(height: Layout.SPACING * 2.5),
                         ElevatedButton(
-                          onPressed: login,
+                          onPressed: () => login(context),
                           child: const Padding(
                             padding: EdgeInsets.all(Layout.SPACING),
                             child: Text('Login'),

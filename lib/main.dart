@@ -6,7 +6,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'screens/home_page/home_page.dart';
 import 'screens/login_page/login_page.dart';
 import 'services/firebase_options.dart';
-import 'services/session.dart';
+import 'services/shared_prefs.dart';
 import 'styles/layout.dart';
 import 'styles/app_theme.dart';
 
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       // darkTheme: darkTheme,
       themeMode: ThemeMode.light,
       home: FutureBuilder(
-        future: Session.getUser(),
+        future: SharedPrefs.getUser(),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.data == null) {
             return DView.nothing();

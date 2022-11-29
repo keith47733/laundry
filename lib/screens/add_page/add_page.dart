@@ -15,7 +15,8 @@ class AddPage extends StatelessWidget {
   final controllerWeight = TextEditingController();
   final controllerPrice = TextEditingController();
 
-  addLaundryOrder() async {
+  addLaundryOrder(context) async {
+    FocusScope.of(context).unfocus();
     bool success = await SourceLaundry.add(
       Laundry(
         customerName: controllerName.text,
@@ -35,9 +36,9 @@ class AddPage extends StatelessWidget {
     );
     if (success) {
       Get.back(result: true);
-      DInfo.snackBarSuccess('Successfully added laundry order');
+      DInfo.snackBarSuccess('Successfully added order');
     } else {
-      DInfo.dialogError('Failed to add laundry order');
+      DInfo.dialogError('Failed to add order');
       DInfo.closeDialog();
     }
   }
@@ -45,11 +46,13 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Laundry Order')),
-      body: Padding(
-        padding: const EdgeInsets.all(Layout.SPACING),
+      appBar: AppBar(title: const Text('Add Order')),
+      body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(Layout.SPACING),
+          padding: const EdgeInsets.symmetric(
+            vertical: Layout.SPACING * 2,
+            horizontal: Layout.SPACING,
+          ),
           child: ListView(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -62,7 +65,7 @@ class AddPage extends StatelessWidget {
               inputBox(
                 context,
                 'Customer name:',
-                'Enter the customer name',
+                'Enter customer name',
                 controllerName,
                 TextInputAction.next,
               ),
@@ -70,7 +73,7 @@ class AddPage extends StatelessWidget {
               inputBox(
                 context,
                 'Weight:',
-                'Enter the weight [kg]',
+                'Enter weight [kg]',
                 controllerWeight,
                 TextInputAction.next,
               ),
@@ -78,16 +81,16 @@ class AddPage extends StatelessWidget {
               inputBox(
                 context,
                 'Price:',
-                'Enter the price [\$]',
+                'Enter price [\$]',
                 controllerPrice,
                 TextInputAction.done,
               ),
               const SizedBox(height: Layout.SPACING * 2),
               ElevatedButton(
-                onPressed: addLaundryOrder,
+                onPressed: () => addLaundryOrder(context),
                 child: const Padding(
                   padding: EdgeInsets.all(Layout.SPACING),
-                  child: Text('Queue Laundry Order'),
+                  child: Text('Add Order'),
                 ),
               ),
               const SizedBox(height: Layout.SPACING / 2),

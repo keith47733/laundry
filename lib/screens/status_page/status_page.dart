@@ -28,13 +28,16 @@ class _StatusPageState extends State<StatusPage> {
         actions: [
           IconButton(
             onPressed: () => _delete(),
-            icon: const Icon(Icons.delete),
+            icon: const Icon(Icons.delete_outline_sharp),
           ),
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(Layout.SPACING * 2),
+          padding: const EdgeInsets.symmetric(
+            vertical: Layout.SPACING * 2,
+            horizontal: Layout.SPACING,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,6 +64,14 @@ class _StatusPageState extends State<StatusPage> {
               ),
               const SizedBox(height: Layout.SPACING),
               const Divider(thickness: 2.0),
+              const SizedBox(height: Layout.SPACING),
+              Center(
+                child: Text(
+                  'Update Current Status',
+                  style: Theme.of(Get.context!).textTheme.titleMedium,
+                  textScaleFactor: 1.2,
+                ),
+              ),
               const SizedBox(height: Layout.SPACING / 2),
               ListView.builder(
                 itemCount: Process.STATUS_DESC.length,
@@ -73,6 +84,9 @@ class _StatusPageState extends State<StatusPage> {
                     tileColour = Colors.grey.withOpacity(0.3);
                     textColour = Colors.grey;
                   } else if (index == widget.laundry.status!) {
+                    tileColour = lighten(Colors.deepOrange, 50);
+                    textColour = Colors.black;
+                  } else if (index == widget.laundry.status! + 1) {
                     tileColour = lighten(Colors.lightGreen, 50);
                     textColour = Colors.black;
                   } else {
@@ -100,35 +114,39 @@ class _StatusPageState extends State<StatusPage> {
                         Process.STATUS_DESC[index],
                         style: Theme.of(context)
                             .textTheme
-                            .bodyLarge!
+                            .bodyMedium!
                             .copyWith(color: textColour),
                       ),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            isComplete
-                                ? Format.date(DateTime.parse(
-                                    widget.laundry.statusDate![index]))
-                                : '',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(color: textColour),
-                          ),
-                          Text(
-                            isComplete
-                                ? Format.time(DateTime.parse(
-                                    widget.laundry.statusDate![index]))
-                                : '',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(color: textColour),
-                          ),
-                        ],
-                      ),
+                      trailing: isComplete
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  Format.month(DateTime.parse(
+                                      widget.laundry.statusDate![index])),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(color: textColour),
+                                ),
+                                Text(
+                                  Format.time(DateTime.parse(
+                                      widget.laundry.statusDate![index])),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(color: textColour),
+                                ),
+                              ],
+                            )
+                          : Text(
+                              'UPDATE',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(color: textColour),
+                            ),
                     ),
                   );
                 },
@@ -179,12 +197,12 @@ class _StatusPageState extends State<StatusPage> {
     if (yes == true) {
       bool success = await SourceLaundry.delete(widget.laundry.id!);
       if (success) {
-        DInfo.dialogSuccess('Successfully deleted laundry order');
+        DInfo.dialogSuccess('Deleted order');
         DInfo.closeDialog(actionAfterClose: () {
           Get.back(result: true);
         });
       } else {
-        DInfo.dialogError('Failed to delete laundry order');
+        DInfo.dialogError('Failed to delete order');
         DInfo.closeDialog();
       }
     }

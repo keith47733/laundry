@@ -18,17 +18,26 @@ class ProcessPage extends StatefulWidget {
 }
 
 class _ProcessPageState extends State<ProcessPage> {
-  // final cWhereStatus = Get.put(CWhereStatus());
+  bool isInit = true;
 
-  refresh() async {
-    final cWhereStatus = Get.put(CWhereStatus());
+  refresh(cWhereStatus) async {
     await cWhereStatus.setList(widget.status);
   }
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   refresh();
+  // }
+
   @override
-  void initState() {
-    super.initState();
-    refresh();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (isInit == true) {
+      isInit = false;
+      final cWhereStatus = Get.put(CWhereStatus());
+      refresh(cWhereStatus);
+    }
   }
 
   @override
@@ -36,8 +45,11 @@ class _ProcessPageState extends State<ProcessPage> {
     return Scaffold(
       appBar: AppBar(title: Text(Process.STATUS_DESC[widget.status])),
       body: GetBuilder<CWhereStatus>(
-        builder: (order) {
-          if (order.list.isEmpty) {
+        builder: (orders) {
+          if (orders.list.firstRebuild) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (orders.list.isEmpty) {
             return Center(
               child: Opacity(
                 opacity: 0.5,
@@ -52,13 +64,13 @@ class _ProcessPageState extends State<ProcessPage> {
           return Padding(
             padding: const EdgeInsets.only(
                 top: Layout.SPACING,
-                left: Layout.SPACING * 2,
-                right: Layout.SPACING * 2,
+                left: Layout.SPACING,
+                right: Layout.SPACING,
                 bottom: Layout.SPACING * 2),
             child: ListView.builder(
-              itemCount: order.list.length,
+              itemCount: orders.list.length,
               itemBuilder: (context, index) {
-                Laundry laundry = order.list[index];
+                Laundry laundry = orders.list[index];
                 return Padding(
                   padding: const EdgeInsets.only(top: Layout.SPACING),
                   child: ListTile(
@@ -75,14 +87,14 @@ class _ProcessPageState extends State<ProcessPage> {
                       fit: BoxFit.cover,
                     ),
                     title: Text(
-                      laundry.customerName!,
+                      laundry.customerName!.toUpperCase(),
                       style: Theme.of(Get.context!).textTheme.bodyMedium,
                     ),
                     subtitle: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          Format.date(DateTime.parse(laundry.statusDate![0])),
+                          Format.month(DateTime.parse(laundry.statusDate![0])),
                           style: Theme.of(Get.context!).textTheme.bodySmall,
                         ),
                         Text(

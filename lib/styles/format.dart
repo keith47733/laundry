@@ -5,6 +5,10 @@ class Format {
     return DateFormat('EEE MMM d, yyyy').format(dateTime);
   }
 
+  static String month(DateTime dateTime) {
+    return DateFormat('MMM d, yyyy').format(dateTime);
+  }
+
   static String time(DateTime dateTime) {
     return DateFormat('hh:mm a').format(dateTime);
   }
